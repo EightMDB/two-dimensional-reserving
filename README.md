@@ -5,7 +5,7 @@ A professional actuarial claims triangle analysis application designed as an ope
 ## 🚀 Quick Start
 
 ### Desktop Application (Recommended)
-Double-click `launch-app.bat` to start the desktop application
+Double-click `launch-app-dev.vbs` to start the desktop application
 
 ### Web Application
 Open `src/index.html` in your web browser
@@ -16,7 +16,9 @@ Open `src/index.html` in your web browser
 two-dimensional-reserving/
 ├── src/                    # Application source code
 │   ├── index.html         # Main application interface
-│   ├── script.js          # Core logic and calculations
+│   ├── triangle-methodology.js  # Claims triangle methodology and calculations
+│   ├── functions.js       # UI functions, wizards, and utilities
+│   ├── main.js            # Application initialization and entry point
 │   └── styles.css         # Professional styling
 ├── docs/                  # Documentation
 │   ├── README.md         # Comprehensive documentation
@@ -25,18 +27,17 @@ two-dimensional-reserving/
 ├── dist/                 # Built desktop application
 ├── main.js               # Electron main process
 ├── package.json          # Project configuration
-├── launch-app.bat        # Windows launcher script
+├── launch-app-dev.vbs    # Application launcher
 └── .gitignore           # Git ignore rules
 ```
 
 ## 🖥️ Deployment Options
 
 ### Desktop Application
-- **Native Windows executable** with professional menu system
+- **Professional interface** with native menu system and keyboard shortcuts
 - **File menu integration** for opening CSV files (Ctrl+O)
-- **Keyboard shortcuts** for common operations
-- **Portable installation** - no dependencies required
-- **Professional window management** with resizing and full-screen support
+- **Automatic dependency management** - launcher handles setup
+- **Silent startup** - no terminal windows or setup dialogs
 
 ### Web Application
 - **Browser-based** interface for cross-platform compatibility

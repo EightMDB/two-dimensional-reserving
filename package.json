@@ -45,7 +45,8 @@
       "docs/",
       "main.js",
       "sample-data/",
-      "launch-app.bat"
+      "launch-app-dev.vbs",
+      "package.json"
     ],
     "win": {
       "target": "portable",

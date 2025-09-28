@@ -127,9 +127,11 @@ npm run pack
 
 ```
 ├── index.html              # Main application interface
-├── script.js               # Core application logic and triangle calculations
+├── triangle-methodology.js # Core actuarial calculations and triangle methodology
+├── functions.js            # UI functions, wizards, configuration, and utilities
+├── main.js                 # Application initialization and state management
 ├── styles.css              # Professional styling and responsive design
-├── main.js                 # Electron main process (desktop app)
+├── electron-main.js        # Electron main process (desktop app)
 ├── package.json            # Node.js dependencies and build configuration
 ├── launch-app.bat          # Windows launcher script
 ├── dist/                   # Built desktop application

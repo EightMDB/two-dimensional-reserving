@@ -663,7 +663,7 @@ function calculateDevelopmentFactors(triangle) {
             const next = triangle.matrix[period] && triangle.matrix[period][dev + 1] ? triangle.matrix[period][dev + 1] : 0;
 
             if (current > 0 && next > 0) {
-                const factor = ((current + next) / current) - 1;
+                const factor = next / current;
                 factors.push(factor);
                 weights.push(current); // Weight by volume
             }
@@ -1791,7 +1791,7 @@ function calculateDevelopmentFactorsForMethod(triangle, config) {
             const next = triangle.matrix[period] && triangle.matrix[period][dev + 1] ? triangle.matrix[period][dev + 1] : 0;
 
             if (current > 0 && next > 0) {
-                const factor = ((current + next) / current) - 1;
+                const factor = next / current;
                 factors.push(factor);
                 weights.push(current);
             }
@@ -1858,9 +1858,9 @@ function calculateReservesFromFactors(triangle, factors) {
     triangle.periods.forEach(period => {
         const paidToDate = Object.values(triangle.matrix[period] || {}).reduce((sum, val) => sum + val, 0);
 
-        // Simple projection using average factor (convert back to cumulative multiplier)
-        const avgFactorIncrement = Object.values(factors).reduce((sum, factor) => sum + factor, 0) / Object.values(factors).length || 0.2;
-        const ultimateEstimate = paidToDate * (1 + avgFactorIncrement);
+        // Simple projection using average development factor
+        const avgDevelopmentFactor = Object.values(factors).reduce((sum, factor) => sum + factor, 0) / Object.values(factors).length || 1.2;
+        const ultimateEstimate = paidToDate * avgDevelopmentFactor;
         const reserve = Math.max(0, ultimateEstimate - paidToDate);
 
         reserves[period] = reserve;
@@ -2415,7 +2415,7 @@ function calculateDetailedFactorsForMethod(triangle, config) {
             const next = triangle.matrix[period] && triangle.matrix[period][dev + 1] ? triangle.matrix[period][dev + 1] : 0;
 
             if (current > 0 && next > 0) {
-                const factor = ((current + next) / current) - 1;
+                const factor = next / current;
                 factors.push(factor);
                 weights.push(current);
             }
@@ -2467,9 +2467,9 @@ function calculateDetailedReservesFromFactors(triangle, factorsByPeriod) {
         Object.entries(factorsByPeriod).forEach(([dev, factorData]) => {
             const currentPaid = triangle.matrix[period] && triangle.matrix[period][dev] ? triangle.matrix[period][dev] : 0;
             if (currentPaid > 0) {
-                // Convert development factor back to cumulative multiplier (add 1)
-                const cumulativeMultiplier = 1 + factorData.factor;
-                ultimateEstimate = Math.max(ultimateEstimate, currentPaid * cumulativeMultiplier);
+                // Apply development factor (which is already a cumulative multiplier)
+                const developmentFactor = factorData.factor;
+                ultimateEstimate = Math.max(ultimateEstimate, currentPaid * developmentFactor);
             }
         });
 
