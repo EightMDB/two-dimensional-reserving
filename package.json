@@ -1,0 +1,67 @@
+{
+  "name": "two-dimensional-reserving",
+  "version": "1.0.0",
+  "description": "A professional web-based actuarial claims triangle analysis application designed as an open source alternative to proprietary solutions like Moody's Axis.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "pack": "electron-packager . \"Two Dimensional Reserving\" --platform=win32 --arch=x64 --out=dist --overwrite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EightMDB/two-dimensional-reserving.git"
+  },
+  "keywords": [
+    "actuarial",
+    "claims-triangle",
+    "insurance",
+    "reserving",
+    "development-factors",
+    "chain-ladder",
+    "desktop-app"
+  ],
+  "author": "Two Dimensional Reserving Project",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/EightMDB/two-dimensional-reserving/issues"
+  },
+  "homepage": "https://github.com/EightMDB/two-dimensional-reserving#readme",
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.actuarial.two-dimensional-reserving",
+    "productName": "Two Dimensional Reserving",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/",
+      "docs/",
+      "main.js",
+      "sample-data/",
+      "launch-app.bat"
+    ],
+    "win": {
+      "target": "portable",
+      "forceCodeSigning": false
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

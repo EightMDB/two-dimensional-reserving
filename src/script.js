@@ -38,7 +38,35 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSummary();
     updateDelimiterFilter();
     loadSavedConfigurations();
+
+    // Desktop app specific initialization
+    initializeDesktopFeatures();
 });
+
+// Desktop Features
+function initializeDesktopFeatures() {
+    // Make handleDesktopFileOpen available globally for Electron main process
+    window.handleDesktopFileOpen = handleDesktopFileOpen;
+}
+
+async function handleDesktopFileOpen(filePath) {
+    try {
+        // For desktop app, we need to read the file using fetch API
+        // Since we can't directly access file system from renderer process
+        const response = await fetch(`file://${filePath}`);
+        const csvContent = await response.text();
+
+        parseCsvData(csvContent);
+        showWizard();
+        showWizardStep(1);
+
+        // Switch to data input tab if not already there
+        switchTab('data-input');
+    } catch (error) {
+        alert('Error opening file: ' + error.message);
+        console.error('Desktop file open error:', error);
+    }
+}
 
 // Tab Management
 function initializeTabs() {
