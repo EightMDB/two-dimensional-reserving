@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Dimensional Reserving - Actuarial Claims Triangle</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-chart-line"></i> Two Dimensional Reserving</h1>
+            <p>Professional Actuarial Claims Triangle Analysis</p>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="data-input">Data Input</button>
+            <button class="tab-btn" data-tab="claims-triangle">Claims Triangle</button>
+            <button class="tab-btn" data-tab="analysis">Analysis</button>
+            <button class="tab-btn" data-tab="export">Export</button>
+        </nav>
+
+        <main class="main-content">
+            <!-- Data Input Tab -->
+            <div id="data-input" class="tab-content active">
+                <div class="upload-section">
+                    <h2>Claims Data Upload</h2>
+                    <p class="upload-description">Upload your claims data via CSV file. The system will guide you through mapping your columns to the required fields.</p>
+
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h3>Drop CSV file here or click to browse</h3>
+                            <p>Supported format: CSV files (.csv)</p>
+                            <button id="browse-file" class="btn btn-primary">
+                                <i class="fas fa-folder-open"></i> Browse Files
+                            </button>
+                        </div>
+                    </div>
+
+                    <input type="file" id="csv-file" accept=".csv" style="display: none;">
+
+                    <div class="data-requirements">
+                        <h3>Required Data Fields</h3>
+                        <div class="requirements-grid">
+                            <div class="requirement-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <strong>Incurred Date</strong>
+                                <span>Date when the claim was incurred</span>
+                            </div>
+                            <div class="requirement-item">
+                                <i class="fas fa-calendar-check"></i>
+                                <strong>Paid Date</strong>
+                                <span>Date when the claim was paid</span>
+                            </div>
+                            <div class="requirement-item">
+                                <i class="fas fa-dollar-sign"></i>
+                                <strong>Paid Amount</strong>
+                                <span>Amount paid for the claim</span>
+                            </div>
+                            <div class="requirement-item optional">
+                                <i class="fas fa-tag"></i>
+                                <strong>Delimiter (Optional)</strong>
+                                <span>Category or bucket identifier</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-filters" id="data-filters" style="display: none;">
+                    <h3>Filter Claims Data</h3>
+                    <div class="filter-controls">
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="date-range-start">Date Range:</label>
+                                <div class="date-range-inputs">
+                                    <input type="date" id="date-range-start" placeholder="Start Date">
+                                    <span>to</span>
+                                    <input type="date" id="date-range-end" placeholder="End Date">
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <label for="amount-range-min">Amount Range:</label>
+                                <div class="amount-range-inputs">
+                                    <input type="number" id="amount-range-min" placeholder="Min Amount" step="0.01">
+                                    <span>to</span>
+                                    <input type="number" id="amount-range-max" placeholder="Max Amount" step="0.01">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-row">
+                            <div class="filter-group">
+                                <label for="delimiter-filter-input">Delimiter Filter:</label>
+                                <select id="delimiter-filter-input" multiple>
+                                    <option value="">All Delimiters</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="search-filter">Search:</label>
+                                <input type="text" id="search-filter" placeholder="Search claims data...">
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button id="apply-filters" class="btn btn-primary">
+                                <i class="fas fa-filter"></i> Apply Filters
+                            </button>
+                            <button id="clear-filters" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Clear Filters
+                            </button>
+                            <span id="filter-results" class="filter-results"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="claims-list">
+                    <h3>Current Claims Data</h3>
+                    <div class="table-container">
+                        <table id="claims-table">
+                            <thead>
+                                <tr>
+                                    <th>Incurred Date</th>
+                                    <th>Paid Date</th>
+                                    <th>Delimiter</th>
+                                    <th>Paid Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="claims-tbody">
+                                <!-- Claims will be added here dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="summary">
+                        <span>Total Claims: <strong id="total-claims">0</strong></span>
+                        <span>Total Amount: <strong id="total-amount">$0.00</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claims Triangle Tab -->
+            <div id="claims-triangle" class="tab-content">
+                <div class="triangle-controls">
+                    <h2>Claims Development Triangle</h2>
+
+                    <div class="triangle-configuration">
+                        <div class="config-section">
+                            <h3>Triangle Configuration</h3>
+                            <div class="config-presets">
+                                <label for="config-preset">Configuration Preset:</label>
+                                <select id="config-preset">
+                                    <option value="default">Default Actuarial Settings</option>
+                                    <option value="custom">Custom Configuration</option>
+                                </select>
+                                <button id="apply-preset" class="btn btn-secondary">
+                                    <i class="fas fa-cog"></i> Apply Preset
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="advanced-config">
+                            <div class="config-row">
+                                <div class="config-group">
+                                    <h4>Date Granularity</h4>
+                                    <div class="form-group">
+                                        <label for="date-granularity">Aggregation Period:</label>
+                                        <select id="date-granularity">
+                                            <option value="monthly">Monthly</option>
+                                            <option value="quarterly" selected>Quarterly</option>
+                                            <option value="annual">Annual</option>
+                                        </select>
+                                        <small>How to group claims by time periods</small>
+                                    </div>
+                                </div>
+
+                                <div class="config-group">
+                                    <h4>Development Measurement</h4>
+                                    <div class="form-group">
+                                        <label for="development-method">Development Type:</label>
+                                        <select id="development-method">
+                                            <option value="lag" selected>Lag (Time since incurred)</option>
+                                            <option value="period">Calendar Period</option>
+                                        </select>
+                                        <small>How to measure claim development timing</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="config-row">
+                                <div class="config-group">
+                                    <h4>Development Factor Calculation</h4>
+                                    <div class="form-group">
+                                        <label for="factor-method">Calculation Method:</label>
+                                        <select id="factor-method">
+                                            <option value="all-years">All Available Data</option>
+                                            <option value="volume-weighted">Volume Weighted Average</option>
+                                            <option value="simple-average">Simple Average</option>
+                                            <option value="recent-periods" selected>Recent Periods Only</option>
+                                            <option value="exclude-high-low">Exclude High/Low</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="recent-periods-config">
+                                        <label for="recent-periods-count">Recent Periods to Use:</label>
+                                        <select id="recent-periods-count">
+                                            <option value="3">3 of 3 (Most Recent 3)</option>
+                                            <option value="6">6 of 6 (Most Recent 6)</option>
+                                            <option value="12" selected>12 of 12 (Most Recent 12)</option>
+                                            <option value="24">24 of 24 (Most Recent 24)</option>
+                                            <option value="custom">Custom Period Count</option>
+                                        </select>
+                                        <input type="number" id="custom-period-count" min="1" max="60" value="12" style="display: none; margin-top: 0.5rem;" placeholder="Number of periods">
+                                        <small>Use only the most recent N periods of complete data for factor calculation</small>
+                                    </div>
+                                    <div class="form-group" id="exclude-high-low-config" style="display: none;">
+                                        <label for="exclude-periods-count">High/Low Exclusion Method:</label>
+                                        <select id="exclude-periods-count">
+                                            <option value="10">10 of 12 (Use 12, exclude high/low)</option>
+                                            <option value="8">8 of 10 (Use 10, exclude high/low)</option>
+                                            <option value="6">6 of 8 (Use 8, exclude high/low)</option>
+                                            <option value="4">4 of 6 (Use 6, exclude high/low)</option>
+                                            <option value="2">2 of 4 (Use 4, exclude high/low)</option>
+                                            <option value="custom-exclude">Custom N of M Configuration</option>
+                                        </select>
+                                        <div id="custom-exclude-inputs" style="display: none; margin-top: 0.5rem;">
+                                            <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                                                <div>
+                                                    <label for="custom-n-value">Use (N):</label>
+                                                    <input type="number" id="custom-n-value" min="1" max="58" value="10" style="width: 80px;">
+                                                </div>
+                                                <div>
+                                                    <label for="custom-m-value">of (M):</label>
+                                                    <input type="number" id="custom-m-value" min="2" max="60" value="12" style="width: 80px;">
+                                                </div>
+                                            </div>
+                                            <small>N must be ≥1 and &lt; M. M must be ≥2. Will use M periods, exclude (M-N) highest/lowest values.</small>
+                                        </div>
+                                        <small>Use N periods from M total, excluding the highest and lowest values</small>
+                                    </div>
+                                </div>
+
+                                <div class="config-group">
+                                    <h4>Additional Settings</h4>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="exclude-outliers" checked>
+                                            Exclude Statistical Outliers (>3 std dev)
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="apply-smoothing">
+                                            Apply Factor Smoothing
+                                        </label>
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="tail-extrapolation" checked>
+                                            Tail Factor Extrapolation
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="config-group">
+                                    <h4>Development Factor Overrides</h4>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox-label">
+                                            <input type="checkbox" id="enable-factor-override">
+                                            Enable factor override after specific period
+                                        </label>
+                                    </div>
+                                    <div class="factor-override-controls" style="display: none; margin-top: 10px;">
+                                        <div class="input-group">
+                                            <label for="override-period">Period cutoff:</label>
+                                            <input type="number" id="override-period" min="1" max="100" value="36" style="width: 80px;">
+                                            <small class="help-text">Set development factors to 0.0 after this period</small>
+                                        </div>
+                                        <div class="input-group" style="margin-top: 10px;">
+                                            <label for="override-factor">Override factor value:</label>
+                                            <input type="number" id="override-factor" min="0.0" max="1.0" step="0.01" value="0.00" style="width: 80px;">
+                                            <small class="help-text">Factor to apply (typically 0.00 for no further development)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="config-actions">
+                                <button id="reset-config" class="btn btn-secondary">
+                                    <i class="fas fa-undo"></i> Reset to Default
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="configuration-management">
+                            <h3>Configuration Management</h3>
+                            <div class="config-controls">
+                                <input type="text" id="config-name" placeholder="Configuration name..." class="config-input">
+                                <button id="save-config" class="btn btn-success">
+                                    <i class="fas fa-save"></i> Save Configuration
+                                </button>
+                                <input type="file" id="config-file" accept=".json" style="display: none;">
+                                <button id="load-config" class="btn btn-info">
+                                    <i class="fas fa-upload"></i> Load Configuration
+                                </button>
+                                <button id="download-config" class="btn btn-warning">
+                                    <i class="fas fa-download"></i> Download Configuration
+                                </button>
+                            </div>
+                            <div id="saved-configs" class="saved-configs">
+                                <h4>Saved Configurations</h4>
+                                <div id="config-list" class="config-list">
+                                    <p class="placeholder">No saved configurations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="generation-controls">
+                        <div class="control-group">
+                            <label for="delimiter-filter">Filter by Delimiter:</label>
+                            <select id="delimiter-filter">
+                                <option value="all">All Delimiters</option>
+                            </select>
+                            <button id="generate-triangle" class="btn btn-primary">
+                                <i class="fas fa-chart-area"></i> Generate Triangle with Configuration
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="triangle-container">
+                    <div class="triangle-display-controls" id="triangle-display-controls" style="display: none;">
+                        <div class="triangle-view-options">
+                            <h4>Triangle Display Options</h4>
+                            <div class="toggle-group">
+                                <label class="toggle-label">
+                                    <input type="radio" name="triangle-view" value="cumulative" checked>
+                                    <span class="toggle-option">Cumulative Triangle</span>
+                                </label>
+                                <label class="toggle-label">
+                                    <input type="radio" name="triangle-view" value="incremental">
+                                    <span class="toggle-option">Incremental Triangle</span>
+                                </label>
+                            </div>
+                            <div class="triangle-info-display">
+                                <p><strong>Cumulative:</strong> Shows total paid amounts from incurred date to each development period</p>
+                                <p><strong>Incremental:</strong> Shows payments made during each specific development period</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="triangle-display">
+                        <p class="placeholder">Configure settings above and click "Generate Triangle" to view the development triangle.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Analysis Tab -->
+            <div id="analysis" class="tab-content">
+                <h2>Statistical Analysis</h2>
+
+                <div class="analysis-section">
+                    <div class="analysis-header collapsible" data-target="dev-factors-content">
+                        <h3>Development Factors</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div id="dev-factors-content" class="analysis-content">
+                        <div id="dev-factors">
+                            <p class="placeholder">Generate claims triangle to view development factors.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <div class="analysis-header collapsible" data-target="reserve-projections-content">
+                        <h3>Reserve Projections</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div id="reserve-projections-content" class="analysis-content">
+                        <div id="reserve-projections">
+                            <p class="placeholder">Statistical projections will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <div class="analysis-header collapsible" data-target="method-comparison-content">
+                        <h3>Method Comparison & Sanity Checks</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div id="method-comparison-content" class="analysis-content">
+                        <div id="method-comparison">
+                            <p class="placeholder">Reserve calculations using multiple methods will appear here for comparison.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <div class="analysis-header collapsible" data-target="summary-stats-content">
+                        <h3>Summary Statistics</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div id="summary-stats-content" class="analysis-content">
+                        <div id="summary-stats">
+                            <p class="placeholder">Summary statistics will be calculated here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-section">
+                    <div class="analysis-header collapsible" data-target="pattern-chart-content">
+                        <h3>Claims Pattern Chart</h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div id="pattern-chart-content" class="analysis-content">
+                        <div class="chart-container">
+                            <canvas id="pattern-chart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Export Tab -->
+            <div id="export" class="tab-content">
+                <h2>Data Export</h2>
+
+                <div class="export-section">
+                    <div class="export-header">
+                        <h3>Claims Data Export</h3>
+                    </div>
+                    <div class="export-content">
+                        <p>Export raw claims data in various formats for external analysis or backup purposes.</p>
+                        <div class="export-buttons">
+                            <button id="export-csv" class="btn btn-success">
+                                <i class="fas fa-file-csv"></i> Export as CSV
+                            </button>
+                            <button id="export-json" class="btn btn-info">
+                                <i class="fas fa-file-code"></i> Export as JSON
+                            </button>
+                            <button id="export-excel" class="btn btn-primary">
+                                <i class="fas fa-file-excel"></i> Export as Excel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-section">
+                    <div class="export-header">
+                        <h3>Triangle Export</h3>
+                    </div>
+                    <div class="export-content">
+                        <p>Export the generated claims development triangle with current configuration settings.</p>
+                        <div class="export-buttons">
+                            <button id="export-triangle-csv" class="btn btn-success">
+                                <i class="fas fa-table"></i> Triangle as CSV
+                            </button>
+                            <button id="export-triangle-pdf" class="btn btn-danger">
+                                <i class="fas fa-file-pdf"></i> Triangle as PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-section">
+                    <div class="export-header">
+                        <h3>Analysis Export</h3>
+                    </div>
+                    <div class="export-content">
+                        <p>Export comprehensive analysis results including development factors, reserves, and statistical summaries.</p>
+                        <div class="export-buttons">
+                            <button id="export-report" class="btn btn-warning">
+                                <i class="fas fa-chart-bar"></i> Full Report
+                            </button>
+                            <button id="export-charts" class="btn btn-info">
+                                <i class="fas fa-image"></i> Charts as Images
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-section audit-export-section">
+                    <div class="export-header">
+                        <h3>Audit Export Package</h3>
+                    </div>
+                    <div class="export-content">
+                        <p>Comprehensive export package for auditing, regulatory compliance, and detailed review purposes.</p>
+                        <div class="export-buttons">
+                            <button id="export-audit-package" class="btn btn-danger">
+                                <i class="fas fa-file-archive"></i> Complete Audit Package
+                            </button>
+                            <button id="export-intermediate-triangles" class="btn btn-warning">
+                                <i class="fas fa-layer-group"></i> Intermediate Triangles
+                            </button>
+                            <button id="export-method-comparison" class="btn btn-info">
+                                <i class="fas fa-balance-scale"></i> Method Comparison
+                            </button>
+                        </div>
+                        <div class="audit-details">
+                            <h4>Audit Package Includes:</h4>
+                            <div class="audit-grid">
+                                <div class="audit-item">
+                                    <i class="fas fa-database"></i>
+                                    <span>Raw claims data with transformations</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-table"></i>
+                                    <span>Primary claims triangle with configuration</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-calculator"></i>
+                                    <span>Development factor calculations (all methods)</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Reserve projections with methodology</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-layer-group"></i>
+                                    <span>Intermediate triangles (cumulative, incremental)</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span>Method comparison and sanity checks</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Configuration settings and metadata</span>
+                                </div>
+                                <div class="audit-item">
+                                    <i class="fas fa-history"></i>
+                                    <span>Calculation audit trail</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Two Dimensional Reserving - Open Source Actuarial Solution</p>
+        </footer>
+    </div>
+
+    <!-- CSV Upload Wizard Modal -->
+    <div id="upload-wizard" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>CSV Upload Wizard</h2>
+                <button class="modal-close" id="close-wizard">&times;</button>
+            </div>
+
+            <div class="wizard-steps">
+                <div class="step active" data-step="1">1. Preview</div>
+                <div class="step" data-step="2">2. Map Columns</div>
+                <div class="step" data-step="3">3. Confirm</div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Step 1: File Preview -->
+                <div id="wizard-step-1" class="wizard-step active">
+                    <h3>File Preview</h3>
+                    <p>Review the first few rows of your CSV file:</p>
+                    <div id="csv-preview" class="csv-preview"></div>
+                    <div class="wizard-actions">
+                        <button id="next-to-mapping" class="btn btn-primary">
+                            Next: Map Columns <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button id="cancel-upload" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Column Mapping -->
+                <div id="wizard-step-2" class="wizard-step">
+                    <h3>Map Your Columns</h3>
+                    <p>Please map your CSV columns to the required data fields:</p>
+
+                    <div class="mapping-grid">
+                        <div class="mapping-row">
+                            <label class="field-label required">
+                                <i class="fas fa-calendar-alt"></i> Incurred Date
+                            </label>
+                            <select id="map-incurred-date" class="mapping-select" required>
+                                <option value="">Select column...</option>
+                            </select>
+                        </div>
+
+                        <div class="mapping-row">
+                            <label class="field-label required">
+                                <i class="fas fa-calendar-check"></i> Paid Date
+                            </label>
+                            <select id="map-paid-date" class="mapping-select" required>
+                                <option value="">Select column...</option>
+                            </select>
+                        </div>
+
+                        <div class="mapping-row">
+                            <label class="field-label required">
+                                <i class="fas fa-dollar-sign"></i> Paid Amount
+                            </label>
+                            <select id="map-amount" class="mapping-select" required>
+                                <option value="">Select column...</option>
+                            </select>
+                        </div>
+
+                        <div class="mapping-row">
+                            <label class="field-label optional">
+                                <i class="fas fa-tag"></i> Delimiter (Optional)
+                            </label>
+                            <select id="map-delimiter" class="mapping-select">
+                                <option value="">None - Use default delimiter</option>
+                            </select>
+                            <div class="delimiter-options">
+                                <label>
+                                    <input type="radio" name="delimiter-type" value="column" checked> Use column from CSV
+                                </label>
+                                <label>
+                                    <input type="radio" name="delimiter-type" value="fixed"> Use fixed value:
+                                    <input type="text" id="fixed-delimiter" placeholder="e.g., ALL" disabled>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wizard-actions">
+                        <button id="back-to-preview" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button id="next-to-confirm" class="btn btn-primary">
+                            Next: Confirm <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Confirmation -->
+                <div id="wizard-step-3" class="wizard-step">
+                    <h3>Confirm Import</h3>
+                    <div id="import-summary" class="import-summary"></div>
+
+                    <div class="sample-data">
+                        <h4>Sample Mapped Data:</h4>
+                        <div id="sample-preview" class="sample-preview"></div>
+                    </div>
+
+                    <div class="wizard-actions">
+                        <button id="back-to-mapping" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button id="confirm-import" class="btn btn-success">
+                            <i class="fas fa-upload"></i> Import Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
