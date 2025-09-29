@@ -4,41 +4,33 @@
 
 // Global state variables for triangle methodology
 // These need to be declared here since this file is loaded first
-if (typeof claimsData === 'undefined') {
-    var claimsData = [];
-}
-if (typeof currentDelimiters === 'undefined') {
-    var currentDelimiters = new Set();
-}
-if (typeof claimsTriangle === 'undefined') {
-    var claimsTriangle = null;
-}
-if (typeof incrementalTriangle === 'undefined') {
-    var incrementalTriangle = null;
-}
-if (typeof filteredClaimsData === 'undefined') {
-    var filteredClaimsData = [];
-}
-if (typeof currentTriangleConfig === 'undefined') {
-    var currentTriangleConfig = {};
-}
-if (typeof lastGeneratedConfig === 'undefined') {
-    var lastGeneratedConfig = null;
-}
+// Use window object to ensure global scope in both browser and Electron
+window.claimsData = window.claimsData || [];
+window.currentDelimiters = window.currentDelimiters || new Set();
+window.claimsTriangle = window.claimsTriangle || null;
+window.incrementalTriangle = window.incrementalTriangle || null;
+window.filteredClaimsData = window.filteredClaimsData || [];
+window.currentTriangleConfig = window.currentTriangleConfig || {};
+window.lastGeneratedConfig = window.lastGeneratedConfig || null;
 
 // Additional global variables needed by other modules
-if (typeof savedConfigurations === 'undefined') {
-    var savedConfigurations = {};
-}
-if (typeof csvData === 'undefined') {
-    var csvData = null;
-}
-if (typeof csvHeaders === 'undefined') {
-    var csvHeaders = [];
-}
-if (typeof columnMapping === 'undefined') {
-    var columnMapping = {};
-}
+window.savedConfigurations = window.savedConfigurations || {};
+window.csvData = window.csvData || null;
+window.csvHeaders = window.csvHeaders || [];
+window.columnMapping = window.columnMapping || {};
+
+// Make variables accessible without window prefix for backwards compatibility
+var claimsData = window.claimsData;
+var currentDelimiters = window.currentDelimiters;
+var claimsTriangle = window.claimsTriangle;
+var incrementalTriangle = window.incrementalTriangle;
+var filteredClaimsData = window.filteredClaimsData;
+var currentTriangleConfig = window.currentTriangleConfig;
+var lastGeneratedConfig = window.lastGeneratedConfig;
+var savedConfigurations = window.savedConfigurations;
+var csvData = window.csvData;
+var csvHeaders = window.csvHeaders;
+var columnMapping = window.columnMapping;
 
 // ===== PERIOD CALCULATION FUNCTIONS =====
 
@@ -151,7 +143,7 @@ function formatIncurredPeriod(period, granularity) {
 // ===== TRIANGLE CONSTRUCTION FUNCTIONS =====
 
 function generateClaimsTriangle() {
-    if (claimsData.length === 0) {
+    if (window.claimsData.length === 0) {
         alert('Please upload claims data first');
         return;
     }
