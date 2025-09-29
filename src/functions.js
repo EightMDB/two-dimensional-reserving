@@ -73,6 +73,12 @@ function initializeEventListeners() {
     document.getElementById('recent-periods').addEventListener('change', handleRecentPeriodsChange);
     document.getElementById('exclude-periods').addEventListener('change', handleExcludePeriodsChange);
 
+    // Enhanced factor method controls
+    if (document.getElementById('volume-weight')) {
+        document.getElementById('volume-weight').addEventListener('input', validateVolumeCountWeights);
+        document.getElementById('count-weight').addEventListener('input', validateVolumeCountWeights);
+    }
+
     // Advanced features
     document.getElementById('export-audit').addEventListener('click', exportAuditPackage);
     document.getElementById('export-intermediate').addEventListener('click', exportIntermediateTriangles);
@@ -871,7 +877,14 @@ function getDefaultConfiguration() {
         tailExtrapolation: true,
         enableFactorOverride: false,
         overridePeriod: 36,
-        overrideFactor: 0.00
+        overrideFactor: 0.00,
+        developmentCutoffThreshold: 1.01,
+        minConsecutivePeriods: 5,
+        // Enhanced Factor Selection Method parameters
+        smoothingAlpha: 0.3,
+        volumeWeight: 70,
+        countWeight: 30,
+        medialExclusionPercent: 20
     };
 }
 
@@ -893,11 +906,28 @@ function applyConfigurationToUI(config) {
     document.getElementById('override-period').value = config.overridePeriod || 36;
     document.getElementById('override-factor').value = config.overrideFactor || 0.00;
 
+    // Enhanced factor method configurations
+    if (document.getElementById('smoothing-alpha')) {
+        document.getElementById('smoothing-alpha').value = config.smoothingAlpha || 0.3;
+    }
+    if (document.getElementById('volume-weight')) {
+        document.getElementById('volume-weight').value = config.volumeWeight || 70;
+    }
+    if (document.getElementById('count-weight')) {
+        document.getElementById('count-weight').value = config.countWeight || 30;
+    }
+    if (document.getElementById('medial-exclusion-percent')) {
+        document.getElementById('medial-exclusion-percent').value = config.medialExclusionPercent || 20;
+    }
+
     // Toggle override controls visibility
     const overrideControls = document.querySelector('.factor-override-controls');
     if (overrideControls) {
         overrideControls.style.display = config.enableFactorOverride ? 'block' : 'none';
     }
+
+    // Update method-specific configuration visibility
+    handleFactorMethodChange();
 }
 
 function getCurrentConfiguration() {
@@ -944,7 +974,14 @@ function getCurrentConfiguration() {
         tailExtrapolation: document.getElementById('tail-extrapolation').checked,
         enableFactorOverride: document.getElementById('enable-factor-override').checked,
         overridePeriod: parseInt(document.getElementById('override-period').value) || 36,
-        overrideFactor: parseFloat(document.getElementById('override-factor').value) || 0.00
+        overrideFactor: parseFloat(document.getElementById('override-factor').value) || 0.00,
+        developmentCutoffThreshold: 1.01, // Use default values for now
+        minConsecutivePeriods: 2,
+        // Enhanced Factor Selection Method parameters
+        smoothingAlpha: parseFloat(document.getElementById('smoothing-alpha')?.value) || 0.3,
+        volumeWeight: parseInt(document.getElementById('volume-weight')?.value) || 70,
+        countWeight: parseInt(document.getElementById('count-weight')?.value) || 30,
+        medialExclusionPercent: parseInt(document.getElementById('medial-exclusion-percent')?.value) || 20
     };
 }
 
@@ -972,15 +1009,35 @@ function handleFactorMethodChange() {
     const recentPeriodsConfig = document.getElementById('recent-periods-config');
     const excludeHighLowConfig = document.getElementById('exclude-high-low-config');
 
-    if (method === 'recent-periods') {
-        recentPeriodsConfig.style.display = 'block';
-        excludeHighLowConfig.style.display = 'none';
-    } else if (method === 'exclude-high-low') {
-        recentPeriodsConfig.style.display = 'none';
-        excludeHighLowConfig.style.display = 'block';
-    } else {
-        recentPeriodsConfig.style.display = 'none';
-        excludeHighLowConfig.style.display = 'none';
+    // Enhanced method configurations
+    const exponentialSmoothingConfig = document.getElementById('exponential-smoothing-config');
+    const volumeCountConfig = document.getElementById('volume-count-config');
+    const medialConfig = document.getElementById('medial-config');
+
+    // Hide all config sections first
+    recentPeriodsConfig.style.display = 'none';
+    excludeHighLowConfig.style.display = 'none';
+    exponentialSmoothingConfig.style.display = 'none';
+    volumeCountConfig.style.display = 'none';
+    medialConfig.style.display = 'none';
+
+    // Show relevant config section based on method
+    switch (method) {
+        case 'recent-periods':
+            recentPeriodsConfig.style.display = 'block';
+            break;
+        case 'exclude-high-low':
+            excludeHighLowConfig.style.display = 'block';
+            break;
+        case 'exponential-smoothing':
+            exponentialSmoothingConfig.style.display = 'block';
+            break;
+        case 'volume-count-weighted':
+            volumeCountConfig.style.display = 'block';
+            break;
+        case 'medial-average':
+            medialConfig.style.display = 'block';
+            break;
     }
 }
 
@@ -1041,6 +1098,27 @@ function validateCustomExcludeValues() {
     }
 
     return nValue >= 1 && mValue >= 2 && nValue < mValue;
+}
+
+function validateVolumeCountWeights() {
+    const volumeWeight = parseInt(document.getElementById('volume-weight')?.value) || 0;
+    const countWeight = parseInt(document.getElementById('count-weight')?.value) || 0;
+    const totalWeight = volumeWeight + countWeight;
+
+    const volumeInput = document.getElementById('volume-weight');
+    const countInput = document.getElementById('count-weight');
+
+    // Reset styles
+    if (volumeInput) volumeInput.style.borderColor = '';
+    if (countInput) countInput.style.borderColor = '';
+
+    if (totalWeight !== 100) {
+        if (volumeInput) volumeInput.style.borderColor = '#e74c3c';
+        if (countInput) countInput.style.borderColor = '#e74c3c';
+        return false;
+    }
+
+    return true;
 }
 
 function initializeCollapsibleSections() {

@@ -194,7 +194,12 @@
                                         <select id="factor-method">
                                             <option value="all-years">All Available Data</option>
                                             <option value="volume-weighted">Volume Weighted Average</option>
+                                            <option value="count-weighted">Count Weighted Average</option>
+                                            <option value="volume-count-weighted">Volume & Count Weighted</option>
                                             <option value="simple-average">Simple Average</option>
+                                            <option value="medial-average">Medial Average (Exclude High/Low)</option>
+                                            <option value="geometric-mean">Geometric Mean</option>
+                                            <option value="exponential-smoothing">Exponential Smoothing</option>
                                             <option value="recent-periods" selected>Recent Periods Only</option>
                                             <option value="exclude-high-low">Exclude High/Low</option>
                                         </select>
@@ -235,6 +240,34 @@
                                             <small>N must be ≥1 and &lt; M. M must be ≥2. Will use M periods, exclude (M-N) highest/lowest values.</small>
                                         </div>
                                         <small>Use N periods from M total, excluding the highest and lowest values</small>
+                                    </div>
+                                </div>
+
+                                <div class="config-group">
+                                    <h4>Enhanced Factor Methods Configuration</h4>
+                                    <div class="form-group" id="exponential-smoothing-config" style="display: none;">
+                                        <label for="smoothing-alpha">Exponential Smoothing Alpha (α):</label>
+                                        <input type="number" id="smoothing-alpha" min="0.1" max="1.0" step="0.05" value="0.3" style="width: 100px;">
+                                        <small>Smoothing parameter: 0.1 (heavy smoothing) to 1.0 (no smoothing)</small>
+                                    </div>
+
+                                    <div class="form-group" id="volume-count-config" style="display: none;">
+                                        <label for="volume-weight">Volume Weight (%):</label>
+                                        <input type="number" id="volume-weight" min="0" max="100" step="5" value="70" style="width: 80px;">
+                                        <label for="count-weight" style="margin-left: 1rem;">Count Weight (%):</label>
+                                        <input type="number" id="count-weight" min="0" max="100" step="5" value="30" style="width: 80px;">
+                                        <small>Weights must sum to 100%</small>
+                                    </div>
+
+                                    <div class="form-group" id="medial-config" style="display: none;">
+                                        <label for="medial-exclusion-percent">Exclusion Percentage:</label>
+                                        <select id="medial-exclusion-percent">
+                                            <option value="10">10% (Remove top/bottom 5% each)</option>
+                                            <option value="20" selected>20% (Remove top/bottom 10% each)</option>
+                                            <option value="30">30% (Remove top/bottom 15% each)</option>
+                                            <option value="40">40% (Remove top/bottom 20% each)</option>
+                                        </select>
+                                        <small>Percentage of extreme values to exclude from medial average</small>
                                     </div>
                                 </div>
 

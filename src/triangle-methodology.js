@@ -461,6 +461,21 @@ function calculateDevelopmentFactors(triangle) {
                 case 'volume-weighted':
                     developmentFactor = calculateVolumeWeightedAverage(factors, weights);
                     break;
+                case 'count-weighted':
+                    developmentFactor = calculateCountWeightedAverage(factors);
+                    break;
+                case 'volume-count-weighted':
+                    developmentFactor = calculateVolumeCountWeightedAverage(factors, weights, config);
+                    break;
+                case 'medial-average':
+                    developmentFactor = calculateMedialAverage(factors, config);
+                    break;
+                case 'geometric-mean':
+                    developmentFactor = calculateGeometricMean(factors);
+                    break;
+                case 'exponential-smoothing':
+                    developmentFactor = calculateExponentialSmoothing(factors, devFactors[dev - 1], config);
+                    break;
                 case 'simple-average':
                 case 'exclude-high-low':
                     developmentFactor = factors.reduce((sum, factor) => sum + factor, 0) / factors.length;
@@ -483,7 +498,10 @@ function calculateDevelopmentFactors(triangle) {
         }
     }
 
-    displayDevelopmentFactors(devFactors, config);
+    // Determine cutoff position where development factors approach 1.0
+    const cutoffPosition = determineDevelopmentCutoff(devFactors, config);
+
+    displayDevelopmentFactors(devFactors, config, cutoffPosition);
 }
 
 function removeOutliers(factors, weights) {
@@ -511,6 +529,91 @@ function calculateVolumeWeightedAverage(factors, weights) {
 
     const weightedSum = factors.reduce((sum, factor, index) => sum + factor * weights[index], 0);
     return weightedSum / totalWeight;
+}
+
+// Enhanced Factor Selection Methods (ROADMAP 1.1)
+
+function calculateCountWeightedAverage(factors) {
+    // Count weighted average gives equal weight to each factor occurrence
+    // This is essentially the same as simple average but maintains the pattern
+    if (factors.length === 0) return 1.0;
+    return factors.reduce((sum, factor) => sum + factor, 0) / factors.length;
+}
+
+function calculateVolumeCountWeightedAverage(factors, weights, config) {
+    // Combines volume and count weighting based on configuration
+    if (factors.length === 0) return 1.0;
+
+    const volumeWeight = (config.volumeWeight || 70) / 100;
+    const countWeight = (config.countWeight || 30) / 100;
+
+    // Normalize weights to ensure they sum to 100%
+    const totalConfigWeight = volumeWeight + countWeight;
+    const normalizedVolumeWeight = volumeWeight / totalConfigWeight;
+    const normalizedCountWeight = countWeight / totalConfigWeight;
+
+    // Calculate volume-weighted component
+    const volumeWeightedResult = calculateVolumeWeightedAverage(factors, weights);
+
+    // Calculate count-weighted component (simple average)
+    const countWeightedResult = calculateCountWeightedAverage(factors);
+
+    // Combine the two approaches
+    return (volumeWeightedResult * normalizedVolumeWeight) +
+           (countWeightedResult * normalizedCountWeight);
+}
+
+function calculateMedialAverage(factors, config) {
+    // Medial average excludes high/low outliers based on percentage
+    if (factors.length <= 2) return factors.reduce((sum, factor) => sum + factor, 0) / factors.length;
+
+    const exclusionPercent = (config.medialExclusionPercent || 20) / 100;
+    const sortedFactors = [...factors].sort((a, b) => a - b);
+
+    // Calculate how many factors to exclude from each end
+    const totalToExclude = Math.floor(sortedFactors.length * exclusionPercent);
+    const excludeFromEachEnd = Math.floor(totalToExclude / 2);
+
+    // If we would exclude too many factors, fall back to simple average
+    if (excludeFromEachEnd * 2 >= sortedFactors.length) {
+        return factors.reduce((sum, factor) => sum + factor, 0) / factors.length;
+    }
+
+    // Extract the middle portion
+    const startIndex = excludeFromEachEnd;
+    const endIndex = sortedFactors.length - excludeFromEachEnd;
+    const medialFactors = sortedFactors.slice(startIndex, endIndex);
+
+    return medialFactors.reduce((sum, factor) => sum + factor, 0) / medialFactors.length;
+}
+
+function calculateGeometricMean(factors) {
+    // Geometric mean calculation for development factors
+    if (factors.length === 0) return 1.0;
+
+    // Handle negative or zero factors (shouldn't happen with development factors, but safety check)
+    const validFactors = factors.filter(factor => factor > 0);
+    if (validFactors.length === 0) return 1.0;
+
+    // Calculate geometric mean: (f1 * f2 * ... * fn)^(1/n)
+    const product = validFactors.reduce((product, factor) => product * factor, 1);
+    return Math.pow(product, 1 / validFactors.length);
+}
+
+function calculateExponentialSmoothing(factors, previousFactor, config) {
+    // Exponential smoothing technique for development factors
+    if (factors.length === 0) return previousFactor || 1.0;
+
+    const alpha = config.smoothingAlpha || 0.3; // Smoothing parameter
+    const currentPeriodAverage = factors.reduce((sum, factor) => sum + factor, 0) / factors.length;
+
+    // If no previous factor available, return current average
+    if (previousFactor === undefined || previousFactor === null) {
+        return currentPeriodAverage;
+    }
+
+    // Apply exponential smoothing: α * current + (1-α) * previous
+    return (alpha * currentPeriodAverage) + ((1 - alpha) * previousFactor);
 }
 
 function excludeHighLowFactors(factors, weights, config) {
@@ -587,18 +690,117 @@ function excludeHighLowFactors(factors, weights, config) {
     };
 }
 
-function displayDevelopmentFactors(devFactors, config) {
+function determineDevelopmentCutoff(devFactors, config) {
+    // Determine the cutoff position where development factors approach 1.0
+    // indicating no further significant development
+
+    const threshold = config.developmentCutoffThreshold || 1.01; // Default threshold of 1.01
+    const minConsecutivePeriods = config.minConsecutivePeriods || 2; // Minimum consecutive periods at threshold
+
+    const factorEntries = Object.entries(devFactors).map(([period, factor]) => ({
+        period: parseInt(period),
+        factor: factor
+    })).sort((a, b) => a.period - b.period);
+
+    if (factorEntries.length === 0) {
+        return null; // No cutoff if no factors
+    }
+
+    let consecutiveCount = 0;
+    let cutoffPosition = null;
+
+    // Look for consecutive periods where the factor is close to 1.0
+    for (let i = 0; i < factorEntries.length; i++) {
+        const factor = factorEntries[i].factor;
+
+        // Check if factor is close to 1.0 (between 0.99 and threshold)
+        if (factor >= 0.99 && factor <= threshold) {
+            consecutiveCount++;
+            if (consecutiveCount >= minConsecutivePeriods && cutoffPosition === null) {
+                // Set cutoff at the first period where we started seeing factors close to 1.0
+                cutoffPosition = factorEntries[i - minConsecutivePeriods + 1].period;
+            }
+        } else {
+            consecutiveCount = 0; // Reset if we break the sequence
+        }
+    }
+
+    // Alternative approach: find the first period where factor is very close to 1.0
+    if (cutoffPosition === null) {
+        for (let i = 0; i < factorEntries.length; i++) {
+            const factor = factorEntries[i].factor;
+            if (Math.abs(factor - 1.0) <= 0.005) { // Within 0.5% of 1.0
+                cutoffPosition = factorEntries[i].period;
+                break;
+            }
+        }
+    }
+
+    return cutoffPosition;
+}
+
+function displayDevelopmentFactors(devFactors, config, cutoffPosition = null) {
     let html = '<div class="dev-factors-info">';
     html += `<h4>Development Factors - ${getFactorMethodDescription(config)}</h4>`;
     if (config.excludeOutliers) html += '<p><small>Outliers excluded (>3 std dev)</small></p>';
     if (config.applySmoothing) html += '<p><small>Smoothing applied</small></p>';
+
+    // Add cutoff information if detected
+    if (cutoffPosition !== null) {
+        html += `<p><small><strong>Development Cutoff:</strong> Factors from period ${cutoffPosition} onward excluded from analysis (approaching 1.0)</small></p>';
+    }
+
     html += '</div>';
 
-    html += '<table class="table"><thead><tr><th>Development Period</th><th>Factor</th><th>Method</th></tr></thead><tbody>';
+    // Filter factors based on cutoff position
+    const factorsToDisplay = {};
+    const excludedFactors = {};
+
     Object.entries(devFactors).forEach(([period, factor]) => {
-        html += `<tr><td>${period} to ${parseInt(period) + 1}</td><td>${factor.toFixed(4)}</td><td>${config.factorMethod}</td></tr>`;
+        const periodNum = parseInt(period);
+        if (cutoffPosition === null || periodNum < cutoffPosition) {
+            factorsToDisplay[period] = factor;
+        } else {
+            excludedFactors[period] = factor;
+        }
     });
+
+    html += '<table class="table"><thead><tr><th>Development Period</th><th>Factor</th><th>Method</th><th>Status</th></tr></thead><tbody>';
+
+    // Display included factors
+    Object.entries(factorsToDisplay).forEach(([period, factor]) => {
+        html += `<tr class="factor-included"><td>${period} to ${parseInt(period) + 1}</td><td>${factor.toFixed(4)}</td><td>${config.factorMethod}</td><td>Included</td></tr>`;
+    });
+
+    // Display excluded factors (if any) with different styling
+    if (Object.keys(excludedFactors).length > 0) {
+        Object.entries(excludedFactors).forEach(([period, factor]) => {
+            html += `<tr class="factor-excluded" style="opacity: 0.6; background-color: #f8f9fa;"><td>${period} to ${parseInt(period) + 1}</td><td>${factor.toFixed(4)}</td><td>${config.factorMethod}</td><td>Excluded (≈1.0)</td></tr>`;
+        });
+    }
+
     html += '</tbody></table>';
+
+    // Add summary statistics
+    if (Object.keys(factorsToDisplay).length > 0) {
+        const includedFactorValues = Object.values(factorsToDisplay);
+        const avgFactor = includedFactorValues.reduce((sum, factor) => sum + factor, 0) / includedFactorValues.length;
+        const maxFactor = Math.max(...includedFactorValues);
+        const minFactor = Math.min(...includedFactorValues);
+
+        html += '<div class="factor-summary" style="margin-top: 1rem; padding: 0.5rem; background-color: #f8f9fa; border-radius: 4px;">';
+        html += '<h5>Factor Analysis Summary</h5>';
+        html += `<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">`;
+        html += `<div><strong>Factors Used:</strong> ${Object.keys(factorsToDisplay).length}</div>`;
+        html += `<div><strong>Average Factor:</strong> ${avgFactor.toFixed(4)}</div>`;
+        html += `<div><strong>Range:</strong> ${minFactor.toFixed(4)} - ${maxFactor.toFixed(4)}</div>`;
+        if (Object.keys(excludedFactors).length > 0) {
+            html += `<div><strong>Factors Excluded:</strong> ${Object.keys(excludedFactors).length}</div>`;
+            html += `<div><strong>Cutoff Period:</strong> ${cutoffPosition}</div>`;
+            html += `<div><strong>Reason:</strong> Factors ≈ 1.0 (no development)</div>`;
+        }
+        html += '</div></div>';
+    }
 
     document.getElementById('dev-factors').innerHTML = html;
 }
@@ -700,6 +902,21 @@ function calculateDevelopmentFactorsForMethod(triangle, config) {
                 case 'volume-weighted':
                     developmentFactor = calculateVolumeWeightedAverage(factors, weights);
                     break;
+                case 'count-weighted':
+                    developmentFactor = calculateCountWeightedAverage(factors);
+                    break;
+                case 'volume-count-weighted':
+                    developmentFactor = calculateVolumeCountWeightedAverage(factors, weights, config);
+                    break;
+                case 'medial-average':
+                    developmentFactor = calculateMedialAverage(factors, config);
+                    break;
+                case 'geometric-mean':
+                    developmentFactor = calculateGeometricMean(factors);
+                    break;
+                case 'exponential-smoothing':
+                    developmentFactor = calculateExponentialSmoothing(factors, devFactors[dev - 1], config);
+                    break;
                 default:
                     developmentFactor = factors.reduce((sum, factor) => sum + factor, 0) / factors.length;
             }
@@ -711,6 +928,19 @@ function calculateDevelopmentFactorsForMethod(triangle, config) {
                 devFactors[dev] = developmentFactor;
             }
         }
+    }
+
+    // Apply the same cutoff logic to method comparison
+    const cutoffPosition = determineDevelopmentCutoff(devFactors, config);
+    if (cutoffPosition !== null) {
+        // Remove factors beyond cutoff position
+        const filteredFactors = {};
+        Object.entries(devFactors).forEach(([period, factor]) => {
+            if (parseInt(period) < cutoffPosition) {
+                filteredFactors[period] = factor;
+            }
+        });
+        return filteredFactors;
     }
 
     return devFactors;
@@ -836,8 +1066,18 @@ function getFactorMethodDescription(config) {
             return 'All Available Data';
         case 'volume-weighted':
             return 'Volume Weighted Average';
+        case 'count-weighted':
+            return 'Count Weighted Average';
+        case 'volume-count-weighted':
+            return `Volume & Count Weighted (${config.volumeWeight}%/${config.countWeight}%)`;
         case 'simple-average':
             return 'Simple Average';
+        case 'medial-average':
+            return `Medial Average (Exclude ${config.medialExclusionPercent}%)`;
+        case 'geometric-mean':
+            return 'Geometric Mean';
+        case 'exponential-smoothing':
+            return `Exponential Smoothing (α=${config.smoothingAlpha})`;
         case 'recent-periods':
             return `Recent ${config.recentPeriodsCount} Periods`;
         case 'exclude-high-low':
