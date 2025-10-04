@@ -1,0 +1,249 @@
+/**
+ * Triangle View Styles
+ * Styling for triangle configuration and display
+ */
+
+/* Configuration Section */
+.config-section {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.config-section h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+  margin-bottom: var(--space-4);
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.config-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.config-group label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--gray-700);
+}
+
+.config-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Triangle Display */
+.triangle-display {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.triangle-display h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+  margin-bottom: var(--space-4);
+}
+
+.triangle-container {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+}
+
+/* Triangle-specific table styling */
+.triangle-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+  background: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.triangle-table th,
+.triangle-table td {
+  padding: var(--space-2);
+  text-align: center;
+  border: 1px solid var(--gray-200);
+  min-width: 80px;
+  white-space: nowrap;
+}
+
+.triangle-table th {
+  background: var(--gray-100);
+  font-weight: var(--font-semibold);
+  color: var(--gray-700);
+}
+
+.triangle-table .period-header {
+  background: var(--primary-color);
+  color: var(--white);
+  font-weight: var(--font-semibold);
+  text-align: left;
+  min-width: 120px;
+}
+
+.triangle-table .dev-period-header {
+  background: var(--secondary-color);
+  color: var(--white);
+  font-weight: var(--font-semibold);
+}
+
+.triangle-table .period-label {
+  background: var(--gray-100);
+  font-weight: var(--font-semibold);
+  text-align: left;
+  color: var(--gray-900);
+  min-width: 120px;
+}
+
+.triangle-table .empty-cell {
+  background: var(--gray-50);
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+.triangle-table .calculated-cell {
+  background: var(--accent-color) / 0.1;
+  font-weight: var(--font-medium);
+  color: var(--primary-color);
+}
+
+.triangle-table .projected-cell {
+  background: var(--warning-color) / 0.1;
+  font-weight: var(--font-medium);
+  color: var(--warning-color);
+}
+
+/* Triangle Navigation */
+.triangle-nav {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.triangle-type-btn {
+  padding: var(--space-2) var(--space-4);
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+.triangle-type-btn:hover {
+  background: var(--gray-200);
+}
+
+.triangle-type-btn.active {
+  background: var(--secondary-color);
+  color: var(--white);
+  border-color: var(--secondary-color);
+}
+
+/* Configuration Status */
+.config-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--info-color) / 0.1;
+  border: 1px solid var(--info-color) / 0.3;
+  border-radius: var(--radius-md);
+  color: var(--info-color);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+.config-status.outdated {
+  background: var(--warning-color) / 0.1;
+  border-color: var(--warning-color) / 0.3;
+  color: var(--warning-color);
+}
+
+/* Triangle Statistics */
+.triangle-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--secondary-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  font-weight: var(--font-medium);
+  margin-top: var(--space-1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .config-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .config-actions {
+    flex-direction: column;
+  }
+
+  .config-actions .button {
+    width: 100%;
+  }
+
+  .triangle-nav {
+    flex-direction: column;
+  }
+
+  .triangle-type-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .triangle-table {
+    font-size: 10px;
+  }
+
+  .triangle-table th,
+  .triangle-table td {
+    min-width: 60px;
+    padding: var(--space-1);
+  }
+
+  .triangle-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

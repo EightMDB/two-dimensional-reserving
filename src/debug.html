@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug File Browser</title>
+</head>
+<body>
+    <h1>Debug File Browser</h1>
+    <button id="test-browse">Test Browse Button</button>
+    <input type="file" id="test-file" accept=".csv">
+
+    <script>
+        console.log('Debug script loaded');
+
+        // Test basic file input functionality
+        document.getElementById('test-browse').addEventListener('click', function() {
+            console.log('Test browse button clicked');
+            document.getElementById('test-file').click();
+        });
+
+        document.getElementById('test-file').addEventListener('change', function(e) {
+            console.log('File selected:', e.target.files[0]);
+        });
+
+        // Check if our main app elements exist
+        setTimeout(() => {
+            const browseBtn = document.getElementById('browse-file-btn');
+            const fileInput = document.getElementById('csv-file-input');
+            const uploadArea = document.getElementById('upload-area');
+
+            console.log('Main app elements check:', {
+                browseBtn: !!browseBtn,
+                fileInput: !!fileInput,
+                uploadArea: !!uploadArea
+            });
+
+            // Check if app object exists
+            console.log('App object:', typeof window.app);
+            console.log('AppState:', typeof window.appState);
+
+            if (browseBtn) {
+                browseBtn.addEventListener('click', function() {
+                    console.log('Main browse button clicked!');
+                });
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

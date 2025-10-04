@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cape Cod - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav" role="navigation">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../projects/projects.html" class="nav-item" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../projects/projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="../projects/project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../data/data-library.html" class="nav-item" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../data/data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="../data/data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="bornhuetter-ferguson.html" class="nav-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="benktander.html" class="nav-item">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cape-cod.html" class="nav-item active">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../help/help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/methodology-guide.html" class="nav-item">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/glossary.html" class="nav-item">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-container">
+                <!-- Dashboard Stats Cards -->
+                <section class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-card-icon blue">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">0</h3>
+                            <p class="stat-label">Cape Cod Runs</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon green">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">--</h3>
+                            <p class="stat-label">Implied LR</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon purple">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">0</h3>
+                            <p class="stat-label">Active Projects</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">--</h3>
+                            <p class="stat-label">Last Analysis</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions Cards -->
+                <section class="content-section">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="quick-actions-grid">
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h3>Start Analysis</h3>
+                            <p>Begin Cape Cod calculation</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <h3>Set Exposures</h3>
+                            <p>Configure premium/exposure data</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <h3>Import Data</h3>
+                            <p>Load triangle with exposures</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3>Compare to BF</h3>
+                            <p>View ratio comparison</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Methodology Overview -->
+                <section class="content-section">
+                    <div class="method-overview-card">
+                        <div class="method-overview-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <div class="method-overview-content">
+                            <h2>About Cape Cod Method</h2>
+                            <p>The Cape Cod method, also known as the Stanard-Bühlmann method, calculates an expected loss ratio from the data itself rather than using an externally-selected ratio. It weights each accident year by its exposure and percent reported to derive an overall expected loss ratio, which is then applied back to individual years. This self-calibrating approach combines the benefits of exposure-based methods with empirical data.</p>
+                            <div class="method-features">
+                                <div class="feature-badge">
+                                    <i class="fas fa-calculator"></i>
+                                    <span>Self-Calibrating</span>
+                                </div>
+                                <div class="feature-badge">
+                                    <i class="fas fa-balance-scale-left"></i>
+                                    <span>Exposure Weighted</span>
+                                </div>
+                                <div class="feature-badge">
+                                    <i class="fas fa-database"></i>
+                                    <span>Data-Driven Ratio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Concepts -->
+                <section class="content-section">
+                    <h2 class="section-title">Key Concepts</h2>
+                    <div class="concepts-grid">
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-percent"></i>
+                            </div>
+                            <h3>Implied Loss Ratio</h3>
+                            <p>Calculated from the data by weighting reported losses by exposure and percent reported, producing an internally consistent estimate.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-chart-area"></i>
+                            </div>
+                            <h3>Exposure Base</h3>
+                            <p>Premium or other measure (earned, written, or in-force premium) used to weight accident years and apply the loss ratio.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-weight"></i>
+                            </div>
+                            <h3>Credibility Weighting</h3>
+                            <p>Automatically assigns more credibility to accident years with greater exposure and development maturity.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h3>Self-Consistency</h3>
+                            <p>The expected loss ratio is derived from the same data being analyzed, creating internal consistency.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Formula Section -->
+                <section class="content-section">
+                    <h2 class="section-title">Core Formulas</h2>
+                    <div class="formula-card">
+                        <h3>Cape Cod Calculation Steps</h3>
+                        <div class="formula-content">
+                            <h4>Step 1: Calculate Implied Loss Ratio</h4>
+                            <div class="formula-display">
+                                <code>ELR = Σ(Reported Losses) / Σ(Exposure × % Reported)</code>
+                            </div>
+
+                            <h4>Step 2: Calculate Expected Ultimate Loss</h4>
+                            <div class="formula-display">
+                                <code>Expected Ultimate = Exposure × ELR</code>
+                            </div>
+
+                            <h4>Step 3: Calculate Reserve</h4>
+                            <div class="formula-display">
+                                <code>Reserve = Expected Ultimate × (1 - % Reported) - Paid</code>
+                            </div>
+                        </div>
+                        <div class="formula-breakdown">
+                            <h4>Where:</h4>
+                            <ul>
+                                <li><strong>ELR</strong> = Expected Loss Ratio (calculated from data)</li>
+                                <li><strong>Exposure</strong> = Earned premium, written premium, or exposure measure</li>
+                                <li><strong>% Reported</strong> = 1 / (Cumulative Development Factor to Ultimate)</li>
+                                <li><strong>Σ</strong> = Sum across all accident years</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cape Cod vs BF -->
+                <section class="content-section">
+                    <h2 class="section-title">Cape Cod vs Bornhuetter-Ferguson</h2>
+                    <div class="comparison-table-card">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Cape Cod</th>
+                                    <th>Bornhuetter-Ferguson</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Expected Loss Ratio</strong></td>
+                                    <td>Calculated from data itself</td>
+                                    <td>Selected externally (pricing, judgment)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Exposure Weighting</strong></td>
+                                    <td>Explicitly weighted by exposure</td>
+                                    <td>Implicit through loss ratio application</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Self-Calibration</strong></td>
+                                    <td>Yes - internally consistent</td>
+                                    <td>No - relies on external input</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Subjectivity</strong></td>
+                                    <td>Lower - ratio determined by data</td>
+                                    <td>Higher - requires ratio selection</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Best Use Case</strong></td>
+                                    <td>Stable portfolios, varying exposures</td>
+                                    <td>When external benchmarks available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Advantages & Limitations -->
+                <section class="content-section">
+                    <h2 class="section-title">Advantages & Limitations</h2>
+                    <div class="two-column-grid">
+                        <div class="advantage-card">
+                            <h3><i class="fas fa-thumbs-up"></i> Advantages</h3>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> No need to select external expected loss ratio</li>
+                                <li><i class="fas fa-check-circle"></i> Automatically weights by exposure and maturity</li>
+                                <li><i class="fas fa-check-circle"></i> Handles varying premium levels across years</li>
+                                <li><i class="fas fa-check-circle"></i> Self-calibrating and internally consistent</li>
+                                <li><i class="fas fa-check-circle"></i> Reduces subjectivity compared to BF</li>
+                                <li><i class="fas fa-check-circle"></i> Works well with premium growth/decline</li>
+                            </ul>
+                        </div>
+                        <div class="limitation-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+                            <ul class="feature-list warning">
+                                <li><i class="fas fa-times-circle"></i> Assumes consistent loss ratio across years</li>
+                                <li><i class="fas fa-times-circle"></i> Sensitive to unusual years in the data</li>
+                                <li><i class="fas fa-times-circle"></i> May not capture year-specific trends</li>
+                                <li><i class="fas fa-times-circle"></i> Requires accurate exposure data</li>
+                                <li><i class="fas fa-times-circle"></i> Can be unstable with limited data</li>
+                                <li><i class="fas fa-times-circle"></i> Doesn't incorporate external market information</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="content-section">
+                    <h2 class="section-title">When to Use Cape Cod</h2>
+                    <div class="use-cases-grid">
+                        <div class="use-case-card recommended">
+                            <div class="use-case-header">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Ideal Applications</h3>
+                            </div>
+                            <ul>
+                                <li>Portfolios with significant premium growth/decline</li>
+                                <li>When loss ratios are relatively stable over time</li>
+                                <li>Lines with reliable exposure measurements</li>
+                                <li>When external loss ratio selection is difficult</li>
+                                <li>As a check against externally-selected BF ratios</li>
+                                <li>Mixed maturities requiring automatic weighting</li>
+                            </ul>
+                        </div>
+                        <div class="use-case-card caution">
+                            <div class="use-case-header">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>Use with Caution</h3>
+                            </div>
+                            <ul>
+                                <li>When loss ratios vary significantly by year</li>
+                                <li>Portfolios undergoing major changes</li>
+                                <li>Limited data (few accident years)</li>
+                                <li>When exposure measures are unreliable</li>
+                                <li>Presence of significant outlier years</li>
+                                <li>Rapidly evolving underwriting or claims practices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Implementation Steps -->
+                <section class="content-section">
+                    <h2 class="section-title">Implementation Steps</h2>
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Gather Exposure Data</h3>
+                                <p>Collect premium or other exposure measure for each accident year (earned premium is most common).</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Calculate Development Factors</h3>
+                                <p>Determine age-to-age factors and percent reported using standard triangle techniques.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Compute Implied Loss Ratio</h3>
+                                <p>Calculate weighted average loss ratio using reported losses and exposure × % reported.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Apply to Each Year</h3>
+                                <p>Use implied loss ratio with each year's exposure to calculate expected ultimate losses.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Calculate Reserves</h3>
+                                <p>Determine reserves using expected ultimate losses and percent unreported for each year.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Exposure Selection Guide -->
+                <section class="content-section">
+                    <h2 class="section-title">Selecting the Exposure Base</h2>
+                    <div class="exposure-guide-card">
+                        <div class="exposure-option">
+                            <div class="exposure-icon"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="exposure-content">
+                                <h4>Earned Premium</h4>
+                                <p><strong>Most Common Choice</strong></p>
+                                <p>✓ Matches revenue recognition</p>
+                                <p>✓ Aligns with loss emergence</p>
+                                <p>⚠ May lag for long-tail lines</p>
+                            </div>
+                        </div>
+                        <div class="exposure-option">
+                            <div class="exposure-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <div class="exposure-content">
+                                <h4>Written Premium</h4>
+                                <p><strong>Alternative Measure</strong></p>
+                                <p>✓ Simple and readily available</p>
+                                <p>✓ Good for quickly growing books</p>
+                                <p>⚠ May not align with loss periods</p>
+                            </div>
+                        </div>
+                        <div class="exposure-option">
+                            <div class="exposure-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="exposure-content">
+                                <h4>In-Force Premium</h4>
+                                <p><strong>For Long-Tail Lines</strong></p>
+                                <p>✓ Better for extended exposure periods</p>
+                                <p>✓ Captures ongoing risk</p>
+                                <p>⚠ More complex to calculate</p>
+                            </div>
+                        </div>
+                        <div class="exposure-option">
+                            <div class="exposure-icon"><i class="fas fa-users"></i></div>
+                            <div class="exposure-content">
+                                <h4>Policy Count / Other</h4>
+                                <p><strong>Non-Premium Measures</strong></p>
+                                <p>✓ Useful when premium is distorted</p>
+                                <p>✓ Can use claims count, units, etc.</p>
+                                <p>⚠ Must be correlated with losses</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Practical Example -->
+                <section class="content-section">
+                    <h2 class="section-title">Simplified Example</h2>
+                    <div class="example-card">
+                        <h3>Cape Cod Calculation Walkthrough</h3>
+                        <div class="example-data">
+                            <table class="example-table">
+                                <thead>
+                                    <tr>
+                                        <th>AY</th>
+                                        <th>Earned Prem</th>
+                                        <th>Reported Loss</th>
+                                        <th>% Reported</th>
+                                        <th>Weighted Denom</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2020</td>
+                                        <td>$1,000,000</td>
+                                        <td>$650,000</td>
+                                        <td>90%</td>
+                                        <td>$900,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2021</td>
+                                        <td>$1,200,000</td>
+                                        <td>$720,000</td>
+                                        <td>75%</td>
+                                        <td>$900,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2022</td>
+                                        <td>$1,500,000</td>
+                                        <td>$750,000</td>
+                                        <td>50%</td>
+                                        <td>$750,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="example-calc">
+                            <h4>Calculation:</h4>
+                            <p><strong>Implied Loss Ratio</strong> = $2,120,000 / $2,550,000 = 83.1%</p>
+                            <p><strong>Expected Ultimate (2022)</strong> = $1,500,000 × 83.1% = $1,246,500</p>
+                            <p><strong>Reserve (2022)</strong> = $1,246,500 × (1 - 50%) = $623,250 (- paid portion)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Input Section -->
+                <section id="data-input" class="tab-panel active" role="tabpanel">
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> Data Upload</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <h3>Upload Claims Data</h3>
+                                <p>Import CSV file with exposure data</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-clipboard-check"></i> Required Fields</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <h3>Accident Year</h3>
+                                <p>Year when the claim occurred</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Development Period</h3>
+                                <p>Time elapsed since accident year</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h3>Reported Losses</h3>
+                                <p>Cumulative reported loss amount</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <h3>Exposure Base</h3>
+                                <p>Earned premium or exposure units</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-calculator"></i> Cape Cod Output</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-percent"></i>
+                                </div>
+                                <h3>Implied Loss Ratio</h3>
+                                <p>Auto-calculated from exposure data</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration" class="tab-panel" role="tabpanel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-cog"></i> Cape Cod Configuration</h2>
+                        <p>Configure exposure base and calculation parameters</p>
+                    </div>
+
+                    <div class="content-card">
+                        <form class="config-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exposure-type"><i class="fas fa-dollar-sign"></i> Exposure Type</label>
+                                    <select id="exposure-type" class="form-control">
+                                        <option value="earned" selected>Earned Premium</option>
+                                        <option value="written">Written Premium</option>
+                                        <option value="inforce">In-Force Premium</option>
+                                        <option value="other">Other (Custom)</option>
+                                    </select>
+                                    <small>Type of exposure base to use</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dev-factors-cc"><i class="fas fa-chart-line"></i> Development Factors</label>
+                                    <select id="dev-factors-cc" class="form-control">
+                                        <option value="chain-ladder" selected>From Chain Ladder</option>
+                                        <option value="industry">Industry Average</option>
+                                        <option value="manual">Manual Input</option>
+                                    </select>
+                                    <small>Source for development patterns</small>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="weighting"><i class="fas fa-balance-scale-left"></i> Exposure Weighting</label>
+                                    <select id="weighting" class="form-control">
+                                        <option value="standard" selected>Standard Cape Cod</option>
+                                        <option value="adjusted">Adjusted Weights</option>
+                                    </select>
+                                    <small>How to weight exposures</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="outlier-treatment"><i class="fas fa-filter"></i> Outlier Treatment</label>
+                                    <select id="outlier-treatment" class="form-control">
+                                        <option value="include" selected>Include All Years</option>
+                                        <option value="exclude">Exclude Outliers</option>
+                                        <option value="cap">Cap Extreme Values</option>
+                                    </select>
+                                    <small>How to handle unusual years</small>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
+                                <button type="button" class="btn-primary">
+                                    <i class="fas fa-play"></i> Calculate Implied LR
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Related Resources -->
+                <section class="content-section">
+                    <h2 class="section-title">Related Resources</h2>
+                    <div class="resource-grid">
+                        <a href="bornhuetter-ferguson.html" class="resource-card">
+                            <i class="fas fa-balance-scale"></i>
+                            <h3>Bornhuetter-Ferguson</h3>
+                            <p>Compare externally vs internally set ratios</p>
+                        </a>
+                        <a href="chain-ladder.html" class="resource-card">
+                            <i class="fas fa-link"></i>
+                            <h3>Chain Ladder</h3>
+                            <p>Provides development factors for Cape Cod</p>
+                        </a>
+                        <a href="benktander.html" class="resource-card">
+                            <i class="fas fa-bezier-curve"></i>
+                            <h3>Benktander</h3>
+                            <p>Can use Cape Cod ratio as starting point</p>
+                        </a>
+                        <a href="../index.html" class="resource-card">
+                            <i class="fas fa-home"></i>
+                            <h3>Home</h3>
+                            <p>Return to methodology selection</p>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Upload Wizard Modal -->
+    <div id="upload-wizard" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog wizard-dialog">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-upload"></i> Upload Data Wizard</h2>
+                <button class="modal-close" id="wizard-close-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="wizard-content">
+                <!-- Wizard content will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for CSV upload -->
+    <input type="file" id="csv-file-input" accept=".csv" style="display: none;">
+
+    <!-- Settings Modal (shared across pages) -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-modal-header">
+            <h2>
+                <i class="fas fa-cog"></i>
+                Settings
+            </h2>
+            <button class="settings-close-btn" id="settings-close-btn" aria-label="Close Settings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="settings-modal-content">
+            <div class="settings-section">
+                <h3><i class="fas fa-palette"></i> Appearance</h3>
+                <div class="setting-item">
+                    <label for="theme-select">Theme</label>
+                    <select id="theme-select" class="setting-select">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="sepia">Sepia</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="font-size">Font Size</label>
+                    <select id="font-size" class="setting-select">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Compact View</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="compact-view">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-calculator"></i> Calculation</h3>
+                <div class="setting-item">
+                    <label for="precision">Decimal Precision</label>
+                    <select id="precision" class="setting-select">
+                        <option value="0">0</option>
+                        <option value="2" selected>2</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Auto-Calculate</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="auto-calculate" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Show Intermediate Steps</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-steps">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-database"></i> Data</h3>
+                <div class="setting-item">
+                    <div class="setting-label">Auto-Save Projects</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="auto-save" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label for="export-format">Default Export Format</label>
+                    <select id="export-format" class="setting-select">
+                        <option value="csv">CSV</option>
+                        <option value="xlsx" selected>Excel (XLSX)</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                <div class="setting-item">
+                    <div class="setting-label">Show Calculation Warnings</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-warnings" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Show Tips</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-tips" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/upload-handler.js"></script>
+</body>
+</html>

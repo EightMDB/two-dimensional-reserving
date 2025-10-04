@@ -4,7 +4,21 @@
       "Bash(dir:*)",
       "Bash(npm run dist:*)",
       "Bash(tasklist)",
-      "Bash(npm run pack:*)"
+      "Bash(npm run pack:*)",
+      "Bash(npm start)",
+      "Bash(python:*)",
+      "Bash(node:*)",
+      "Bash(start src/index.html)",
+      "Bash(start http://localhost:8080)",
+      "Bash(start http://localhost:8080/debug.html)",
+      "Bash(start index.html)",
+      "Bash(grep:*)",
+      "Bash(tree:*)",
+      "Bash(for dir in projects data analysis tools settings help)",
+      "Bash(do if [ -d \"$dir\" ])",
+      "Bash(then mv \"$dir\"/* \"pages/$dir/\")",
+      "Bash(fi)",
+      "Bash(done)"
     ],
     "deny": [],
     "ask": []

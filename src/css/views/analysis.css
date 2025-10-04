@@ -1,0 +1,141 @@
+/**
+ * Analysis View Styles
+ * Styling for statistical analysis and development factors
+ */
+
+/* Analysis Section */
+.analysis-section {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.analysis-section h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+  margin-bottom: var(--space-4);
+}
+
+/* Development Factors Display */
+.factors-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.factor-card {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.factor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.factor-period {
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+}
+
+.factor-value {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--secondary-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.factor-details {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  line-height: 1.4;
+}
+
+/* Reserve Projections */
+.projections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+}
+
+.projection-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.projection-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--gray-600);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.projection-amount {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--primary-color);
+  margin-bottom: var(--space-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.projection-change {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+.projection-change.positive {
+  color: var(--success-color);
+}
+
+.projection-change.negative {
+  color: var(--error-color);
+}
+
+/* Charts and Visualizations */
+.chart-container {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.chart-title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--gray-900);
+}
+
+.chart-canvas {
+  width: 100%;
+  height: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .projections-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-canvas {
+    height: 250px;
+  }
+}

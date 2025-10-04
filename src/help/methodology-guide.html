@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology Guide - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../projects/projects.html" class="nav-item" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../projects/projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="../projects/project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../data/data-library.html" class="nav-item" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../data/data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="../data/data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../methodologies/chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/bornhuetter-ferguson.html" class="nav-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/benktander.html" class="nav-item">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/cape-cod.html" class="nav-item">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="methodology-guide.html" class="nav-item active">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="glossary.html" class="nav-item">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="page-header">
+                <div>
+                    <h1><i class="fas fa-book"></i> Methodology Guide</h1>
+                    <p class="page-description">Comprehensive documentation for all reserving methodologies</p>
+                </div>
+            </div>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-balance-scale"></i> When to Use Each Method</h3>
+                    <div class="methodology-cards">
+                        <div class="method-card">
+                            <div class="method-header blue">
+                                <i class="fas fa-link"></i>
+                                <h4>Chain Ladder</h4>
+                            </div>
+                            <div class="method-body">
+                                <h5>Best For:</h5>
+                                <ul>
+                                    <li>Stable loss development patterns</li>
+                                    <li>Sufficient historical data</li>
+                                    <li>Mature lines of business</li>
+                                </ul>
+                                <h5>Considerations:</h5>
+                                <ul>
+                                    <li>Assumes past patterns continue</li>
+                                    <li>Sensitive to outliers in recent periods</li>
+                                    <li>May be unstable for immature data</li>
+                                </ul>
+                                <a href="../chain-ladder.html" class="btn btn-sm btn-primary">View Method →</a>
+                            </div>
+                        </div>
+
+                        <div class="method-card">
+                            <div class="method-header green">
+                                <i class="fas fa-balance-scale"></i>
+                                <h4>Bornhuetter-Ferguson</h4>
+                            </div>
+                            <div class="method-body">
+                                <h5>Best For:</h5>
+                                <ul>
+                                    <li>New or emerging lines</li>
+                                    <li>When a priori loss ratios are available</li>
+                                    <li>Unstable development patterns</li>
+                                </ul>
+                                <h5>Considerations:</h5>
+                                <ul>
+                                    <li>Requires credible expected loss ratio</li>
+                                    <li>Less responsive to recent trends</li>
+                                    <li>Balances between data and expectations</li>
+                                </ul>
+                                <a href="../bornhuetter-ferguson.html" class="btn btn-sm btn-primary">View Method →</a>
+                            </div>
+                        </div>
+
+                        <div class="method-card">
+                            <div class="method-header purple">
+                                <i class="fas fa-bezier-curve"></i>
+                                <h4>Benktander</h4>
+                            </div>
+                            <div class="method-body">
+                                <h5>Best For:</h5>
+                                <ul>
+                                    <li>Iterative convergence between CL and BF</li>
+                                    <li>When both methods are appropriate</li>
+                                    <li>Seeking middle-ground estimate</li>
+                                </ul>
+                                <h5>Considerations:</h5>
+                                <ul>
+                                    <li>Typically uses 1-2 iterations</li>
+                                    <li>Combines strengths of CL and BF</li>
+                                    <li>Requires same inputs as BF</li>
+                                </ul>
+                                <a href="../benktander.html" class="btn btn-sm btn-primary">View Method →</a>
+                            </div>
+                        </div>
+
+                        <div class="method-card">
+                            <div class="method-header orange">
+                                <i class="fas fa-water"></i>
+                                <h4>Cape Cod</h4>
+                            </div>
+                            <div class="method-body">
+                                <h5>Best For:</h5>
+                                <ul>
+                                    <li>Estimating implied loss ratio</li>
+                                    <li>Varying exposure by period</li>
+                                    <li>Limited a priori information</li>
+                                </ul>
+                                <h5>Considerations:</h5>
+                                <ul>
+                                    <li>Assumes constant loss ratio across periods</li>
+                                    <li>Requires exposure base data</li>
+                                    <li>Data-driven loss ratio estimate</li>
+                                </ul>
+                                <a href="../cape-cod.html" class="btn btn-sm btn-primary">View Method →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-chart-bar"></i> Comparison Matrix</h3>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th>Chain Ladder</th>
+                                    <th>Bornhuetter-Ferguson</th>
+                                    <th>Benktander</th>
+                                    <th>Cape Cod</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Data Requirements</strong></td>
+                                    <td>Historical triangles</td>
+                                    <td>Triangles + a priori LR</td>
+                                    <td>Triangles + a priori LR</td>
+                                    <td>Triangles + exposures</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Complexity</strong></td>
+                                    <td>Low</td>
+                                    <td>Medium</td>
+                                    <td>Medium</td>
+                                    <td>Medium</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Responsiveness</strong></td>
+                                    <td>High</td>
+                                    <td>Low</td>
+                                    <td>Medium</td>
+                                    <td>Medium</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stability</strong></td>
+                                    <td>Low (volatile)</td>
+                                    <td>High</td>
+                                    <td>Medium</td>
+                                    <td>High</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-lightbulb"></i> Best Practices</h3>
+                    <div class="best-practices-list">
+                        <div class="practice-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Run Multiple Methods</h4>
+                                <p>Compare results from different methodologies to understand the range of reasonable estimates</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Review Data Quality</h4>
+                                <p>Use the Data Diagnostics tool to identify and address data quality issues before analysis</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Document Assumptions</h4>
+                                <p>Keep clear records of methodological choices, parameter selections, and key assumptions</p>
+                            </div>
+                        </div>
+                        <div class="practice-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Perform Sensitivity Analysis</h4>
+                                <p>Test different assumptions using the What-If Calculator to understand result sensitivity</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/help/methodology-guide.js"></script>
+</body>
+</html>

@@ -4,9 +4,6 @@ A professional actuarial claims triangle analysis application designed as an ope
 
 ## 🚀 Quick Start
 
-### Desktop Application (Recommended)
-Double-click `launch-app-dev.vbs` to start the desktop application
-
 ### Web Application
 Open `src/index.html` in your web browser
 
@@ -14,60 +11,83 @@ Open `src/index.html` in your web browser
 
 ```
 two-dimensional-reserving/
-├── src/                    # Application source code
-│   ├── index.html         # Main application interface
-│   ├── triangle-methodology.js  # Claims triangle methodology and calculations
-│   ├── functions.js       # UI functions, wizards, and utilities
-│   ├── main.js            # Application initialization and entry point
-│   └── styles.css         # Professional styling
-├── docs/                  # Documentation
-│   ├── README.md         # Comprehensive documentation
-│   └── LICENSE           # License information
-├── sample-data/          # Example CSV files for testing
-├── dist/                 # Built desktop application
-├── main.js               # Electron main process
-├── package.json          # Project configuration
-├── launch-app-dev.vbs    # Application launcher
-└── .gitignore           # Git ignore rules
+├── src/                        # Application source code
+│   ├── index.html             # Main application homepage
+│   ├── debug.html             # Debug/testing interface
+│   ├── css/                   # Stylesheets
+│   │   ├── main.css          # Global styles and variables
+│   │   ├── sidebar.css       # Sidebar navigation styles
+│   │   ├── components/       # Reusable component styles
+│   │   └── views/            # Page-specific styles
+│   ├── js/                    # JavaScript modules
+│   │   ├── main.js           # Application entry point
+│   │   ├── sidebar.js        # Sidebar navigation logic
+│   │   ├── controllers/      # Business logic controllers
+│   │   ├── services/         # Data services (File, Validation, Calculation)
+│   │   ├── views/            # UI rendering modules
+│   │   ├── state/            # Application state management
+│   │   ├── utils/            # Utility functions
+│   │   ├── methodologies/    # Actuarial methodology implementations
+│   │   └── pages/            # Page-specific scripts
+│   ├── methodologies/         # Methodology pages
+│   │   ├── chain-ladder.html
+│   │   ├── bornhuetter-ferguson.html
+│   │   ├── benktander.html
+│   │   └── cape-cod.html
+│   ├── projects/              # Project management pages
+│   ├── data/                  # Data library pages
+│   ├── analysis/              # Analysis dashboard pages
+│   ├── tools/                 # Utility tools pages
+│   ├── settings/              # Settings pages
+│   └── help/                  # Help and documentation pages
+├── docs/                      # Documentation
+│   ├── README.md             # Comprehensive documentation
+│   ├── project-structure.md  # Architecture documentation
+│   ├── ROADMAP.md            # Development roadmap
+│   └── *.md                  # Additional documentation
+├── dist/                      # Built desktop application
+├── electron-main.js           # Electron main process
+├── package.json               # Project configuration
+├── launch-app-dev.vbs         # Application launcher
+└── README.md                  # This file
 ```
 
 ## 🖥️ Deployment Options
-
-### Desktop Application
-- **Professional interface** with native menu system and keyboard shortcuts
-- **File menu integration** for opening CSV files (Ctrl+O)
-- **Automatic dependency management** - launcher handles setup
-- **Silent startup** - no terminal windows or setup dialogs
 
 ### Web Application
 - **Browser-based** interface for cross-platform compatibility
 - **Direct file upload** via drag & drop or file browser
 - **Modern responsive design** optimized for desktop browsers
 
-## 🏗️ Development Commands
-
-```bash
-# Install dependencies
-npm install
-
-# Run development version
-npm start
-
-# Build portable executable
-npm run pack
-
-# Build installer (advanced)
-npm run dist
 ```
 
 ## 📊 Features
 
+### Navigation & Interface
+- **Sidebar Navigation**: Organized access to all features and methodologies
+- **Responsive Design**: Modern, professional interface that works across devices
+- **Theme Support**: Light, dark, and sepia themes with customizable settings
+- **Project Management**: Create, save, and manage multiple analysis projects
+
+### Actuarial Methodologies
+- **Chain Ladder**: Classic development triangle methodology
+- **Bornhuetter-Ferguson**: Expected loss ratio method with development patterns (To-Do)
+- **Benktander**: Iterative credibility-weighted approach (To-Do)
+- **Cape Cod**: Exposure-weighted expected loss methodology (To-Do)
+
 ### Data Management
-- **CSV Upload Wizard**: Step-by-step guided import with column mapping
-- **Drag & Drop Interface**: Modern file upload with visual feedback
+- **Data Library**: Centralized data storage and management
+- **CSV Upload**: Import claims data with guided wizard
+- **Data Viewer**: Interactive table view with filtering and sorting
 - **Data Validation**: Automatic validation of required fields and formats
-- **Real-time Filtering**: Filter claims by date range, amount, delimiter, and search
 - **Data Export**: Multiple formats (CSV, JSON, Excel) with audit trails
+
+### Analysis Tools
+- **Analysis Dashboard**: Comprehensive view of all calculations and results
+- **Results Viewer**: Detailed examination of reserve projections
+- **Report Builder**: Generate professional actuarial reports
+- **Reserve Calculator**: Quick calculations and projections
+- **Data Diagnostics**: Data quality assessment and validation tools
 
 ### Claims Triangle Generation
 - **Multiple Granularities**: Monthly, quarterly, and annual aggregation
@@ -80,18 +100,11 @@ npm run dist
   - Custom factor overrides
 - **Visual Display**: Interactive triangle views (cumulative and incremental)
 
-### Statistical Analysis
-- **Development Factors**: Multiple calculation methodologies with detailed breakdowns
-- **Reserve Projections**: Automated reserve calculations using chain ladder methods
-- **Method Comparison**: Side-by-side comparison of different actuarial methods
-- **Enhanced Statistics**: Comprehensive statistical summaries and pattern analysis
-- **Pattern Visualization**: Interactive charts showing development patterns
-
-### Export & Audit Capabilities
-- **Comprehensive Audit Package**: Complete documentation for regulatory review
-- **Intermediate Triangles**: Export of all calculation stages
-- **Method Comparison Reports**: Detailed comparison analysis
+### Project Features
+- **Project Comparison**: Side-by-side comparison of different projects and methods
 - **Configuration Management**: Save, load, and share triangle configurations
+- **Audit Trail**: Complete documentation for regulatory review
+- **Help & Documentation**: Built-in methodology guides and glossary
 
 ## 📋 Data Requirements
 
@@ -103,12 +116,6 @@ The application processes claims data with these fields:
 4. **Delimiter** (string, optional): Category identifier for grouping claims into reserving buckets
 
 ## 💻 System Requirements
-
-### Desktop Application
-- **Windows**: Windows 10 or later (64-bit)
-- **Memory**: 512 MB RAM minimum, 1 GB recommended
-- **Storage**: 200 MB available space
-- **Dependencies**: None (completely portable)
 
 ### Web Application
 - **Browsers**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
@@ -129,10 +136,6 @@ The application processes claims data with these fields:
 - **Packaging**: electron-packager for creating portable executables
 - **Security**: Sandboxed renderer process with secure file access
 - **Distribution**: Standalone executable with no installation required
-
-## 📦 Distribution
-
-The desktop application is distributed as a portable executable requiring no installation. Simply copy the `dist/Two Dimensional Reserving-win32-x64/` folder to any Windows computer and run the executable.
 
 ## 🤝 Contributing
 

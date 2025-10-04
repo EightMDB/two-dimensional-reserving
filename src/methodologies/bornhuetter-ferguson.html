@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bornhuetter-Ferguson - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav" role="navigation">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../projects/projects.html" class="nav-item" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../projects/projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="../projects/project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../data/data-library.html" class="nav-item" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../data/data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="../data/data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="bornhuetter-ferguson.html" class="nav-item active">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="benktander.html" class="nav-item">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cape-cod.html" class="nav-item">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../help/help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/methodology-guide.html" class="nav-item">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/glossary.html" class="nav-item">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-container">
+                <!-- Dashboard Stats Cards -->
+                <section class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-card-icon blue">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">0</h3>
+                            <p class="stat-label">BF Analyses</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon green">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">65%</h3>
+                            <p class="stat-label">Avg Loss Ratio</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon purple">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">0</h3>
+                            <p class="stat-label">Active Projects</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">--</h3>
+                            <p class="stat-label">Last Analysis</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions Cards -->
+                <section class="content-section">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="quick-actions-grid">
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h3>Start Analysis</h3>
+                            <p>Begin new BF reserve calculation</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h3>Set Loss Ratio</h3>
+                            <p>Configure expected loss ratio</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <h3>Import Triangle</h3>
+                            <p>Load development triangle data</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>View Example</h3>
+                            <p>See sample BF calculation</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Methodology Overview -->
+                <section class="content-section">
+                    <div class="method-overview-card">
+                        <div class="method-overview-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="method-overview-content">
+                            <h2>About Bornhuetter-Ferguson Method</h2>
+                            <p>The Bornhuetter-Ferguson (BF) method combines expected loss ratios with actual development patterns to produce stable reserve estimates. This approach is particularly valuable when historical data is limited or unreliable, as it incorporates a priori expectations while still reflecting actual development experience.</p>
+                            <div class="method-features">
+                                <div class="feature-badge">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Stable Estimates</span>
+                                </div>
+                                <div class="feature-badge">
+                                    <i class="fas fa-weight"></i>
+                                    <span>Credibility Weighted</span>
+                                </div>
+                                <div class="feature-badge">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Expected Loss Based</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Concepts -->
+                <section class="content-section">
+                    <h2 class="section-title">Key Concepts</h2>
+                    <div class="concepts-grid">
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <h3>Expected Loss Ratio</h3>
+                            <p>A priori expectation of ultimate loss ratio based on pricing assumptions, historical experience, or expert judgment.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-percent"></i>
+                            </div>
+                            <h3>Percent Unreported</h3>
+                            <p>The proportion of ultimate losses not yet reported, calculated from development patterns.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-balance-scale-right"></i>
+                            </div>
+                            <h3>Credibility Weighting</h3>
+                            <p>Balances between expected losses and actual development patterns based on data maturity.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <h3>Exposure Base</h3>
+                            <p>Premium or other measure used to apply expected loss ratios (earned premium, written premium, etc.).</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Formula Section -->
+                <section class="content-section">
+                    <h2 class="section-title">Core Formula</h2>
+                    <div class="formula-card">
+                        <h3>Bornhuetter-Ferguson Reserve Formula</h3>
+                        <div class="formula-content">
+                            <div class="formula-display">
+                                <code>Reserve = (Expected Ultimate Loss × % Unreported) + (Actual Reported - Expected Reported)</code>
+                            </div>
+                            <p class="formula-explanation">Or equivalently:</p>
+                            <div class="formula-display">
+                                <code>Reserve = Expected Ultimate × (1 - % Reported) - (Paid to Date)</code>
+                            </div>
+                        </div>
+                        <div class="formula-breakdown">
+                            <h4>Component Breakdown:</h4>
+                            <ul>
+                                <li><strong>Expected Ultimate Loss</strong> = Exposure × Expected Loss Ratio</li>
+                                <li><strong>% Unreported</strong> = 1 - (1 / Cumulative Development Factor to Ultimate)</li>
+                                <li><strong>Expected Reported</strong> = Expected Ultimate × % Reported</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Advantages & Limitations -->
+                <section class="content-section">
+                    <h2 class="section-title">Advantages & Limitations</h2>
+                    <div class="two-column-grid">
+                        <div class="advantage-card">
+                            <h3><i class="fas fa-thumbs-up"></i> Advantages</h3>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> More stable than Chain Ladder for immature periods</li>
+                                <li><i class="fas fa-check-circle"></i> Incorporates external information and expertise</li>
+                                <li><i class="fas fa-check-circle"></i> Less sensitive to random fluctuations</li>
+                                <li><i class="fas fa-check-circle"></i> Works well with limited historical data</li>
+                                <li><i class="fas fa-check-circle"></i> Reduces volatility in reserve estimates</li>
+                            </ul>
+                        </div>
+                        <div class="limitation-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+                            <ul class="feature-list warning">
+                                <li><i class="fas fa-times-circle"></i> Requires selection of appropriate expected loss ratio</li>
+                                <li><i class="fas fa-times-circle"></i> May not capture emerging trends quickly</li>
+                                <li><i class="fas fa-times-circle"></i> Sensitive to choice of exposure base</li>
+                                <li><i class="fas fa-times-circle"></i> Can be overly conservative for mature periods</li>
+                                <li><i class="fas fa-times-circle"></i> Assumes constant expected loss ratio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="content-section">
+                    <h2 class="section-title">When to Use Bornhuetter-Ferguson</h2>
+                    <div class="use-cases-grid">
+                        <div class="use-case-card recommended">
+                            <div class="use-case-header">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Recommended For</h3>
+                            </div>
+                            <ul>
+                                <li>New lines of business with limited history</li>
+                                <li>Immature accident years with high uncertainty</li>
+                                <li>Lines with significant environmental changes</li>
+                                <li>When pricing data provides good benchmarks</li>
+                                <li>Volatile lines where stability is important</li>
+                            </ul>
+                        </div>
+                        <div class="use-case-card caution">
+                            <div class="use-case-header">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>Use with Caution</h3>
+                            </div>
+                            <ul>
+                                <li>Mature accident years with stable patterns</li>
+                                <li>When expected loss ratios are unreliable</li>
+                                <li>Lines experiencing rapid development changes</li>
+                                <li>When actual experience diverges from expectations</li>
+                                <li>Short-tail business with quick settlement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Implementation Steps -->
+                <section class="content-section">
+                    <h2 class="section-title">Implementation Steps</h2>
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Select Expected Loss Ratio</h3>
+                                <p>Determine appropriate expected loss ratio from pricing studies, historical averages, or industry benchmarks.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Calculate Development Patterns</h3>
+                                <p>Compute age-to-age development factors from historical triangles (similar to Chain Ladder).</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Determine Percent Unreported</h3>
+                                <p>Calculate the percentage of ultimate losses not yet emerged for each development period.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Apply BF Formula</h3>
+                                <p>Combine expected losses with percent unreported to estimate reserves for each accident year.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Validate Results</h3>
+                                <p>Compare BF estimates with Chain Ladder and other methods. Investigate significant differences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Input Section -->
+                <section id="data-input" class="tab-panel active" role="tabpanel">
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> Data Upload</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <h3>Upload Claims Data</h3>
+                                <p>Import CSV file with triangle data</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-clipboard-check"></i> Required Fields</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <h3>Accident Year</h3>
+                                <p>Year when the claim occurred</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Development Period</h3>
+                                <p>Time elapsed since accident year</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <h3>Loss Amount</h3>
+                                <p>Paid or incurred cumulative loss</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <h3>Earned Premium</h3>
+                                <p>Premium exposure for each year</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-sliders-h"></i> BF Method Parameters</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-percent"></i>
+                                </div>
+                                <h3>Expected Loss Ratio</h3>
+                                <p>A priori loss ratio assumption</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration" class="tab-panel" role="tabpanel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-cog"></i> BF Configuration</h2>
+                        <p>Configure expected loss ratios and development factors</p>
+                    </div>
+
+                    <div class="content-card">
+                        <form class="config-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="loss-ratio"><i class="fas fa-percent"></i> Expected Loss Ratio</label>
+                                    <input type="number" id="loss-ratio" class="form-control" value="65.0" step="0.1" min="0" max="100">
+                                    <small>A priori expected loss ratio (%)</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="loss-ratio-source"><i class="fas fa-source"></i> Loss Ratio Source</label>
+                                    <select id="loss-ratio-source" class="form-control">
+                                        <option value="pricing">Pricing Indication</option>
+                                        <option value="historical">Historical Average</option>
+                                        <option value="industry">Industry Benchmark</option>
+                                        <option value="manual" selected>Manual Input</option>
+                                    </select>
+                                    <small>Source of expected loss ratio</small>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dev-factors"><i class="fas fa-chart-line"></i> Development Factors</label>
+                                    <select id="dev-factors" class="form-control">
+                                        <option value="chain-ladder" selected>From Chain Ladder</option>
+                                        <option value="industry">Industry Average</option>
+                                        <option value="manual">Manual Input</option>
+                                    </select>
+                                    <small>Source for development patterns</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="credibility"><i class="fas fa-balance-scale"></i> Credibility Approach</label>
+                                    <select id="credibility" class="form-control">
+                                        <option value="standard" selected>Standard BF</option>
+                                        <option value="custom">Custom Weights</option>
+                                    </select>
+                                    <small>Credibility weighting method</small>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
+                                <button type="button" class="btn-primary">
+                                    <i class="fas fa-play"></i> Run Analysis
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Related Resources -->
+                <section class="content-section">
+                    <h2 class="section-title">Related Resources</h2>
+                    <div class="resource-grid">
+                        <a href="chain-ladder.html" class="resource-card">
+                            <i class="fas fa-link"></i>
+                            <h3>Chain Ladder</h3>
+                            <p>Compare with traditional development method</p>
+                        </a>
+                        <a href="benktander.html" class="resource-card">
+                            <i class="fas fa-bezier-curve"></i>
+                            <h3>Benktander</h3>
+                            <p>Iterative combination of BF and Chain Ladder</p>
+                        </a>
+                        <a href="cape-cod.html" class="resource-card">
+                            <i class="fas fa-water"></i>
+                            <h3>Cape Cod</h3>
+                            <p>Expected loss ratio with exposure weighting</p>
+                        </a>
+                        <a href="../index.html" class="resource-card">
+                            <i class="fas fa-home"></i>
+                            <h3>Home</h3>
+                            <p>Return to methodology selection</p>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Upload Wizard Modal -->
+    <div id="upload-wizard" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog wizard-dialog">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-upload"></i> Upload Data Wizard</h2>
+                <button class="modal-close" id="wizard-close-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="wizard-content">
+                <!-- Wizard content will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for CSV upload -->
+    <input type="file" id="csv-file-input" accept=".csv" style="display: none;">
+
+    <!-- Settings Modal (shared across pages) -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-modal-header">
+            <h2>
+                <i class="fas fa-cog"></i>
+                Settings
+            </h2>
+            <button class="settings-close-btn" id="settings-close-btn" aria-label="Close Settings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="settings-modal-content">
+            <div class="settings-section">
+                <h3><i class="fas fa-palette"></i> Appearance</h3>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Theme</div>
+                        <div class="settings-item-description">Choose your preferred color theme</div>
+                    </div>
+                    <select class="settings-select" id="settings-theme-select">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="sepia">Sepia</option>
+                    </select>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Compact Mode</div>
+                        <div class="settings-item-description">Reduce spacing for more content</div>
+                    </div>
+                    <div class="settings-toggle" id="settings-compact-toggle"></div>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-calculator"></i> Calculation</h3>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Auto-calculate</div>
+                        <div class="settings-item-description">Automatically recalculate on data change</div>
+                    </div>
+                    <div class="settings-toggle active" id="settings-autocalc-toggle"></div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Decimal Places</div>
+                        <div class="settings-item-description">Number of decimal places in results</div>
+                    </div>
+                    <select class="settings-select" id="settings-decimals-select">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected>4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-database"></i> Data</h3>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Auto-save Projects</div>
+                        <div class="settings-item-description">Automatically save project changes</div>
+                    </div>
+                    <div class="settings-toggle active" id="settings-autosave-toggle"></div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Default Date Format</div>
+                        <div class="settings-item-description">Format for date columns</div>
+                    </div>
+                    <select class="settings-select" id="settings-dateformat-select">
+                        <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                        <option value="mm/dd/yyyy">MM/DD/YYYY</option>
+                        <option value="dd/mm/yyyy">DD/MM/YYYY</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Show Notifications</div>
+                        <div class="settings-item-description">Display success and error messages</div>
+                    </div>
+                    <div class="settings-toggle active" id="settings-notifications-toggle"></div>
+                </div>
+                <div class="settings-item">
+                    <div class="settings-item-info">
+                        <div class="settings-item-label">Calculation Warnings</div>
+                        <div class="settings-item-description">Alert on potential data issues</div>
+                    </div>
+                    <div class="settings-toggle active" id="settings-warnings-toggle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/upload-handler.js"></script>
+</body>
+</html>

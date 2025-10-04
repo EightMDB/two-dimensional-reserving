@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Projects - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <!-- Sidebar (same as projects.html) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav" role="navigation">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projects.html" class="nav-item active" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../data/data-library.html" class="nav-item" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../data/data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="../data/data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../methodologies/chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/bornhuetter-ferguson.html" class="nav-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/benktander.html" class="nav-item">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/cape-cod.html" class="nav-item">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../help/help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/methodology-guide.html" class="nav-item">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/glossary.html" class="nav-item">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1><i class="fas fa-code-compare"></i> Compare Projects</h1>
+                    <p class="page-description">Side-by-side comparison of project metrics and results</p>
+                </div>
+                <button class="btn btn-primary" id="export-comparison-btn">
+                    <i class="fas fa-download"></i> Export Comparison
+                </button>
+            </div>
+
+            <!-- Project Selection -->
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-folder-open"></i> Select Projects to Compare (2-4 projects)</h3>
+                    <div class="project-selection-grid">
+                        <div class="selection-slot">
+                            <select id="project-select-1" class="form-input">
+                                <option value="">Select Project 1</option>
+                            </select>
+                        </div>
+                        <div class="selection-slot">
+                            <select id="project-select-2" class="form-input">
+                                <option value="">Select Project 2</option>
+                            </select>
+                        </div>
+                        <div class="selection-slot">
+                            <select id="project-select-3" class="form-input">
+                                <option value="">Select Project 3 (Optional)</option>
+                            </select>
+                        </div>
+                        <div class="selection-slot">
+                            <select id="project-select-4" class="form-input">
+                                <option value="">Select Project 4 (Optional)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" id="compare-btn" disabled>
+                            <i class="fas fa-chart-bar"></i> Compare Selected Projects
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparison Results -->
+            <section class="content-section" id="comparison-section" style="display: none;">
+                <!-- Side-by-Side Metrics -->
+                <div class="content-card">
+                    <h3><i class="fas fa-chart-line"></i> Metrics Comparison</h3>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table" id="metrics-table">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Project 1</th>
+                                    <th>Project 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Methodology</strong></td>
+                                    <td>Chain Ladder</td>
+                                    <td>Bornhuetter-Ferguson</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Data Records</strong></td>
+                                    <td>1,250</td>
+                                    <td>1,180</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ultimate Loss Estimate</strong></td>
+                                    <td>$12,450,000</td>
+                                    <td>$11,890,000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>IBNR Reserve</strong></td>
+                                    <td>$3,200,000</td>
+                                    <td>$2,950,000</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status</strong></td>
+                                    <td><span class="badge-success">Complete</span></td>
+                                    <td><span class="badge-success">Complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last Run</strong></td>
+                                    <td>2025-09-28</td>
+                                    <td>2025-09-27</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Visual Comparisons -->
+                <div class="content-card">
+                    <h3><i class="fas fa-chart-bar"></i> Visual Comparison</h3>
+                    <div class="chart-placeholder">
+                        <i class="fas fa-chart-column"></i>
+                        <p>Comparison charts will appear here</p>
+                    </div>
+                </div>
+
+                <!-- Key Differences -->
+                <div class="content-card">
+                    <h3><i class="fas fa-exchange-alt"></i> Key Differences</h3>
+                    <div class="differences-grid">
+                        <div class="difference-card">
+                            <div class="difference-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <h4>Reserve Difference</h4>
+                            <p class="difference-value">$250,000</p>
+                            <p class="difference-label">Project 1 higher by 8.5%</p>
+                        </div>
+                        <div class="difference-card">
+                            <div class="difference-icon">
+                                <i class="fas fa-table"></i>
+                            </div>
+                            <h4>Data Volume</h4>
+                            <p class="difference-value">70 records</p>
+                            <p class="difference-label">Project 1 has more data</p>
+                        </div>
+                        <div class="difference-card">
+                            <div class="difference-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Methodology</h4>
+                            <p class="difference-value">Different</p>
+                            <p class="difference-label">CL vs BF approach</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/projects/project-comparison.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 
 To develop the most comprehensive, legally compliant, and professionally robust open-source actuarial reserving platform that serves as a complete alternative to proprietary solutions while meeting regulatory requirements and industry best practices.
 
-## Current Status: v1.0 - Foundation Complete 
+## Current Status: v0.0.2 - Foundation Complete 
 
 ### Implemented Core Features
 -  Chain Ladder methodology with multiple calculation methods

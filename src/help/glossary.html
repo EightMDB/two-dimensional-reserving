@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actuarial Glossary - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../projects/projects.html" class="nav-item" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../projects/projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="../projects/project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../data/data-library.html" class="nav-item" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../data/data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="../data/data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../methodologies/chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/bornhuetter-ferguson.html" class="nav-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/benktander.html" class="nav-item">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/cape-cod.html" class="nav-item">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="methodology-guide.html" class="nav-item">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="glossary.html" class="nav-item active">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="page-header">
+                <div>
+                    <h1><i class="fas fa-list"></i> Actuarial Glossary</h1>
+                    <p class="page-description">Terms, definitions, and formulas reference</p>
+                </div>
+            </div>
+
+            <section class="content-section">
+                <div class="search-box large">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="glossary-search" placeholder="Search terms...">
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-book"></i> Common Terms</h3>
+                    <div class="glossary-list">
+                        <div class="glossary-item">
+                            <h4>Chain Ladder Method</h4>
+                            <p>A reserving technique that uses historical loss development patterns to project future claim development. Also known as the development method or link ratio method.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Development Factor (LDF)</h4>
+                            <p>The ratio of cumulative losses at one valuation point to cumulative losses at an earlier valuation point. Used to project ultimate losses.</p>
+                            <div class="formula-box">
+                                <code>LDF = Cumulative Losses(t+1) / Cumulative Losses(t)</code>
+                            </div>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>IBNR (Incurred But Not Reported)</h4>
+                            <p>Reserves for losses that have occurred but have not yet been reported to the insurer. Often used to refer to all types of reserve development, including IBNER.</p>
+                            <div class="formula-box">
+                                <code>IBNR = Ultimate Losses - Paid Losses - Case Reserves</code>
+                            </div>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Ultimate Loss</h4>
+                            <p>The total estimated amount of all losses for a given accident period, including paid losses, case reserves, and IBNR.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Loss Ratio</h4>
+                            <p>The ratio of incurred losses to earned premium, typically expressed as a percentage. A key metric for evaluating underwriting profitability.</p>
+                            <div class="formula-box">
+                                <code>Loss Ratio = Incurred Losses / Earned Premium</code>
+                            </div>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Tail Factor</h4>
+                            <p>An additional development factor applied beyond the last observed development period to account for continued development to ultimate.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Accident Year</h4>
+                            <p>The calendar year in which a loss event occurred, regardless of when it was reported or paid.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Development Period</h4>
+                            <p>The time elapsed since the accident date, typically measured in months or years. Used to track loss development patterns.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Bornhuetter-Ferguson Method</h4>
+                            <p>A reserving method that combines an a priori loss ratio estimate with observed loss development. Provides more stability than Chain Ladder for immature years.</p>
+                            <div class="formula-box">
+                                <code>IBNR = (Expected Losses × % Unreported) + (Actual Losses - Expected Losses × % Reported)</code>
+                            </div>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Cape Cod Method</h4>
+                            <p>A variant of Bornhuetter-Ferguson that estimates the expected loss ratio from the data itself, rather than requiring an external a priori estimate.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Benktander Method</h4>
+                            <p>An iterative method that combines Chain Ladder and Bornhuetter-Ferguson, typically converging after 1-2 iterations to produce a credibility-weighted estimate.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Triangle</h4>
+                            <p>A matrix displaying loss data by accident year and development period, forming a triangular shape as older years have more development periods observed.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Cumulative Paid</h4>
+                            <p>The total amount of claims paid from the beginning of an accident period through a given evaluation date.</p>
+                        </div>
+                        <div class="glossary-item">
+                            <h4>Incremental Paid</h4>
+                            <p>The amount of claims paid during a specific development period, calculated as the difference between cumulative paid amounts.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-calculator"></i> Key Formulas</h3>
+                    <div class="formulas-grid">
+                        <div class="formula-card">
+                            <h4>Age-to-Age Factor</h4>
+                            <div class="formula-box">
+                                <code>f(n,n+1) = C(n+1) / C(n)</code>
+                            </div>
+                            <p>Where C(n) is cumulative paid at age n</p>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Age-to-Ultimate Factor</h4>
+                            <div class="formula-box">
+                                <code>F(n,∞) = f(n,n+1) × f(n+1,n+2) × ... × Tail</code>
+                            </div>
+                            <p>Product of all subsequent age-to-age factors</p>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Ultimate Losses (CL)</h4>
+                            <div class="formula-box">
+                                <code>Ultimate = C(current) × F(current,∞)</code>
+                            </div>
+                            <p>Current cumulative multiplied by age-to-ultimate</p>
+                        </div>
+                        <div class="formula-card">
+                            <h4>IBNR Reserve</h4>
+                            <div class="formula-box">
+                                <code>IBNR = Ultimate - Cumulative Paid</code>
+                            </div>
+                            <p>Total reserve requirement</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/help/glossary.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+/**
+ * Tab Navigation Component
+ * Professional tab navigation with responsive design
+ */
+
+/* Tab Navigation Container */
+.tab-navigation {
+  grid-area: navigation;
+  display: flex;
+  background: var(--gray-800);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.tab-navigation::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Individual Tab Buttons - Defined in buttons.css for consistency */
+
+/* Tab Panel Content */
+.tab-panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(var(--space-2));
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.tab-panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tab Indicator (Optional Enhancement) */
+.tab-navigation::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: all var(--transition-normal);
+  pointer-events: none;
+}
+
+/* Responsive Tab Behavior */
+@media (max-width: 768px) {
+  .tab-navigation {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Tab Badge (for notifications, etc.) */
+.tab-button .tab-badge {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  background: var(--error-color);
+  color: var(--white);
+  font-size: var(--text-xs);
+  font-weight: var(--font-bold);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-2xl);
+  min-width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* Tab Loading State */
+.tab-button.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.tab-button.loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+.tab-button.loading > * {
+  opacity: 0.3;
+}
+
+/* Tab Validation States */
+.tab-button.has-error {
+  position: relative;
+}
+
+.tab-button.has-error::after {
+  content: '';
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 6px;
+  height: 6px;
+  background: var(--error-color);
+  border-radius: 50%;
+}
+
+.tab-button.has-warning::after {
+  background: var(--warning-color);
+}
+
+.tab-button.has-success::after {
+  background: var(--success-color);
+}
+
+/* Keyboard Navigation */
+.tab-button:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .tab-navigation {
+    border-bottom: 2px solid;
+  }
+
+  .tab-button.active {
+    border: 2px solid;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .tab-button,
+  .tab-panel {
+    transition: none;
+  }
+
+  .tab-navigation {
+    scroll-behavior: auto;
+  }
+}

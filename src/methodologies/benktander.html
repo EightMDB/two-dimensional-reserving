@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benktander - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav" role="navigation">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../projects/projects.html" class="nav-item" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../projects/projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="../projects/project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../data/data-library.html" class="nav-item" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../data/data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="../data/data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="bornhuetter-ferguson.html" class="nav-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="benktander.html" class="nav-item active">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="cape-cod.html" class="nav-item">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../help/help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/methodology-guide.html" class="nav-item">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/glossary.html" class="nav-item">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-container">
+                <!-- Dashboard Stats Cards -->
+                <section class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-card-icon blue">
+                            <i class="fas fa-bezier-curve"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">0</h3>
+                            <p class="stat-label">Benktander Runs</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon green">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">2</h3>
+                            <p class="stat-label">Default Iterations</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon purple">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">0</h3>
+                            <p class="stat-label">Active Projects</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-card-content">
+                            <h3 class="stat-value">--</h3>
+                            <p class="stat-label">Last Analysis</p>
+                        </div>
+                        <div class="stat-card-trend">
+                            <span class="trend-indicator neutral">
+                                <i class="fas fa-minus"></i>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions Cards -->
+                <section class="content-section">
+                    <h2 class="section-title">Quick Actions</h2>
+                    <div class="quick-actions-grid">
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <h3>Start Analysis</h3>
+                            <p>Begin iterative calculation</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h3>Set Iterations</h3>
+                            <p>Configure iteration count</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <h3>Import Triangle</h3>
+                            <p>Load development triangle data</p>
+                        </div>
+
+                        <div class="action-card">
+                            <div class="action-card-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h3>Compare Methods</h3>
+                            <p>View BF vs CL convergence</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Methodology Overview -->
+                <section class="content-section">
+                    <div class="method-overview-card">
+                        <div class="method-overview-icon">
+                            <i class="fas fa-bezier-curve"></i>
+                        </div>
+                        <div class="method-overview-content">
+                            <h2>About Benktander Method</h2>
+                            <p>The Benktander method is an iterative technique that bridges the gap between the Chain Ladder and Bornhuetter-Ferguson methods. It applies credibility weighting iteratively, converging toward the Chain Ladder estimate while maintaining the stability benefits of the BF approach. This hybrid methodology provides a balanced solution that adapts to data maturity.</p>
+                            <div class="method-features">
+                                <div class="feature-badge">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <span>Iterative Process</span>
+                                </div>
+                                <div class="feature-badge">
+                                    <i class="fas fa-compress-arrows-alt"></i>
+                                    <span>Converges to CL</span>
+                                </div>
+                                <div class="feature-badge">
+                                    <i class="fas fa-layer-group"></i>
+                                    <span>Hybrid Approach</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Concepts -->
+                <section class="content-section">
+                    <h2 class="section-title">Key Concepts</h2>
+                    <div class="concepts-grid">
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-repeat"></i>
+                            </div>
+                            <h3>Iterative Process</h3>
+                            <p>Applies the BF formula repeatedly, using the previous iteration's result as the expected loss for the next iteration.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Convergence</h3>
+                            <p>With sufficient iterations, the method converges to the Chain Ladder estimate, providing a smooth transition.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h3>Credibility Evolution</h3>
+                            <p>Each iteration increases credibility given to observed data versus a priori expectations.</p>
+                        </div>
+                        <div class="concept-card">
+                            <div class="concept-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h3>Flexible Credibility</h3>
+                            <p>Number of iterations controls the balance between BF stability and CL responsiveness.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Formula Section -->
+                <section class="content-section">
+                    <h2 class="section-title">Iterative Formula</h2>
+                    <div class="formula-card">
+                        <h3>Benktander Reserve Calculation</h3>
+                        <div class="formula-content">
+                            <div class="formula-display">
+                                <code>Iteration 0: R₀ = BF Estimate</code>
+                            </div>
+                            <div class="formula-display">
+                                <code>Iteration n: Rₙ = (Expected Ultimate from Rₙ₋₁) × % Unreported</code>
+                            </div>
+                            <p class="formula-explanation">Where:</p>
+                            <div class="formula-display">
+                                <code>Expected Ultimate = Paid + Rₙ₋₁</code>
+                            </div>
+                        </div>
+                        <div class="formula-breakdown">
+                            <h4>Iteration Behavior:</h4>
+                            <ul>
+                                <li><strong>1 Iteration</strong>: Identical to Bornhuetter-Ferguson</li>
+                                <li><strong>2 Iterations</strong>: Standard Benktander (GB1)</li>
+                                <li><strong>Many Iterations</strong>: Converges to Chain Ladder</li>
+                                <li><strong>Typical Use</strong>: 1-3 iterations for practical applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Method Comparison -->
+                <section class="content-section">
+                    <h2 class="section-title">Position Among Methods</h2>
+                    <div class="comparison-card">
+                        <h3>Methodological Spectrum</h3>
+                        <div class="spectrum-container">
+                            <div class="spectrum-bar">
+                                <div class="spectrum-point bf">
+                                    <div class="spectrum-label">Bornhuetter-Ferguson</div>
+                                    <div class="spectrum-marker"></div>
+                                    <div class="spectrum-desc">Most conservative<br/>Relies on a priori</div>
+                                </div>
+                                <div class="spectrum-point benktander">
+                                    <div class="spectrum-label">Benktander (1-3 iter)</div>
+                                    <div class="spectrum-marker"></div>
+                                    <div class="spectrum-desc">Balanced approach<br/>Hybrid credibility</div>
+                                </div>
+                                <div class="spectrum-point cl">
+                                    <div class="spectrum-label">Chain Ladder</div>
+                                    <div class="spectrum-marker"></div>
+                                    <div class="spectrum-desc">Most responsive<br/>Data-driven</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="spectrum-note"><i class="fas fa-info-circle"></i> Benktander with more iterations moves toward Chain Ladder</p>
+                    </div>
+                </section>
+
+                <!-- Advantages & Limitations -->
+                <section class="content-section">
+                    <h2 class="section-title">Advantages & Limitations</h2>
+                    <div class="two-column-grid">
+                        <div class="advantage-card">
+                            <h3><i class="fas fa-thumbs-up"></i> Advantages</h3>
+                            <ul class="feature-list">
+                                <li><i class="fas fa-check-circle"></i> Balances stability and responsiveness</li>
+                                <li><i class="fas fa-check-circle"></i> Smooth transition from BF to CL</li>
+                                <li><i class="fas fa-check-circle"></i> Flexible credibility control via iterations</li>
+                                <li><i class="fas fa-check-circle"></i> Reduces impact of outliers</li>
+                                <li><i class="fas fa-check-circle"></i> Works well for intermediate maturities</li>
+                                <li><i class="fas fa-check-circle"></i> Maintains mathematical consistency</li>
+                            </ul>
+                        </div>
+                        <div class="limitation-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+                            <ul class="feature-list warning">
+                                <li><i class="fas fa-times-circle"></i> Still requires selection of expected loss ratio</li>
+                                <li><i class="fas fa-times-circle"></i> More complex than single-iteration methods</li>
+                                <li><i class="fas fa-times-circle"></i> Iteration count selection can be subjective</li>
+                                <li><i class="fas fa-times-circle"></i> May not add value for very mature years</li>
+                                <li><i class="fas fa-times-circle"></i> Computational overhead increases with iterations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- When to Use -->
+                <section class="content-section">
+                    <h2 class="section-title">When to Use Benktander</h2>
+                    <div class="use-cases-grid">
+                        <div class="use-case-card recommended">
+                            <div class="use-case-header">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Ideal Applications</h3>
+                            </div>
+                            <ul>
+                                <li>Intermediate maturity accident years</li>
+                                <li>When you want to blend BF and CL approaches</li>
+                                <li>Lines with moderate development volatility</li>
+                                <li>As a sensitivity test between methods</li>
+                                <li>When credibility should evolve over time</li>
+                            </ul>
+                        </div>
+                        <div class="use-case-card caution">
+                            <div class="use-case-header">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h3>Consider Alternatives</h3>
+                            </div>
+                            <ul>
+                                <li>Very immature years → Use BF directly</li>
+                                <li>Mature years with stable patterns → Use Chain Ladder</li>
+                                <li>When expected loss ratios are unreliable</li>
+                                <li>Simple analyses where complexity isn't warranted</li>
+                                <li>Lines with very rapid or very slow development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Implementation Steps -->
+                <section class="content-section">
+                    <h2 class="section-title">Implementation Steps</h2>
+                    <div class="steps-container">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Establish Initial Estimate</h3>
+                                <p>Calculate Bornhuetter-Ferguson reserve as the starting point (Iteration 0).</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Determine Development Patterns</h3>
+                                <p>Calculate age-to-age factors and percent unreported for each development period.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Apply First Iteration</h3>
+                                <p>Use BF estimate + paid as new "expected ultimate" and recalculate reserves.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Repeat as Needed</h3>
+                                <p>Continue iterating until desired credibility level or convergence is achieved.</p>
+                            </div>
+                        </div>
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Analyze Results</h3>
+                                <p>Compare results across iterations and with Chain Ladder to select appropriate iteration count.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Iteration Selection Guide -->
+                <section class="content-section">
+                    <h2 class="section-title">Selecting Number of Iterations</h2>
+                    <div class="iteration-guide-card">
+                        <div class="iteration-option">
+                            <div class="iteration-badge">1</div>
+                            <div class="iteration-content">
+                                <h4>One Iteration (BF)</h4>
+                                <p><strong>Use when:</strong> Data is very immature or unreliable</p>
+                                <p><strong>Result:</strong> Identical to Bornhuetter-Ferguson</p>
+                            </div>
+                        </div>
+                        <div class="iteration-option">
+                            <div class="iteration-badge">2</div>
+                            <div class="iteration-content">
+                                <h4>Two Iterations (GB1)</h4>
+                                <p><strong>Use when:</strong> Moderate maturity, balanced credibility desired</p>
+                                <p><strong>Result:</strong> Standard Benktander, commonly used in practice</p>
+                            </div>
+                        </div>
+                        <div class="iteration-option">
+                            <div class="iteration-badge">3-5</div>
+                            <div class="iteration-content">
+                                <h4>Multiple Iterations</h4>
+                                <p><strong>Use when:</strong> Greater weight to actual data is appropriate</p>
+                                <p><strong>Result:</strong> Moves closer to Chain Ladder estimate</p>
+                            </div>
+                        </div>
+                        <div class="iteration-option">
+                            <div class="iteration-badge">∞</div>
+                            <div class="iteration-content">
+                                <h4>Convergence (CL)</h4>
+                                <p><strong>Use when:</strong> Data is mature and reliable</p>
+                                <p><strong>Result:</strong> Converges to Chain Ladder (just use CL directly)</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Input Section -->
+                <section id="data-input" class="tab-panel active" role="tabpanel">
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-cloud-upload-alt"></i> Data Upload</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                                <h3>Upload Claims Data</h3>
+                                <p>Import CSV file with triangle data</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-clipboard-check"></i> Required Fields</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <h3>Accident Year</h3>
+                                <p>Year when the claim occurred</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Development Period</h3>
+                                <p>Time elapsed since accident year</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <h3>Loss Amount</h3>
+                                <p>Paid or incurred cumulative loss</p>
+                            </div>
+
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <h3>Earned Premium</h3>
+                                <p>Premium exposure for each year</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-sliders-h"></i> Benktander Parameters</h2>
+                        <div class="quick-actions-grid">
+                            <div class="action-card">
+                                <div class="action-card-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <h3>Iteration Count</h3>
+                                <p>Number of iterative calculations (default: 2)</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration" class="tab-panel" role="tabpanel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-cog"></i> Benktander Configuration</h2>
+                        <p>Configure iteration parameters and development factors</p>
+                    </div>
+
+                    <div class="content-card">
+                        <form class="config-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="iterations"><i class="fas fa-sync-alt"></i> Number of Iterations</label>
+                                    <input type="number" id="iterations" class="form-control" value="2" step="1" min="1" max="10">
+                                    <small>Standard Benktander uses 2 iterations (GB1)</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="loss-ratio-benk"><i class="fas fa-percent"></i> Expected Loss Ratio</label>
+                                    <input type="number" id="loss-ratio-benk" class="form-control" value="65.0" step="0.1" min="0" max="100">
+                                    <small>Initial expected loss ratio (%)</small>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dev-factors-benk"><i class="fas fa-chart-line"></i> Development Factors</label>
+                                    <select id="dev-factors-benk" class="form-control">
+                                        <option value="chain-ladder" selected>From Chain Ladder</option>
+                                        <option value="industry">Industry Average</option>
+                                        <option value="manual">Manual Input</option>
+                                    </select>
+                                    <small>Source for development patterns</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="convergence"><i class="fas fa-crosshairs"></i> Convergence Check</label>
+                                    <select id="convergence" class="form-control">
+                                        <option value="fixed" selected>Fixed Iterations</option>
+                                        <option value="auto">Auto-Converge</option>
+                                    </select>
+                                    <small>Stop at fixed count or when converged</small>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn-secondary">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
+                                <button type="button" class="btn-primary">
+                                    <i class="fas fa-play"></i> Run Analysis
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Related Resources -->
+                <section class="content-section">
+                    <h2 class="section-title">Related Resources</h2>
+                    <div class="resource-grid">
+                        <a href="bornhuetter-ferguson.html" class="resource-card">
+                            <i class="fas fa-balance-scale"></i>
+                            <h3>Bornhuetter-Ferguson</h3>
+                            <p>Starting point for Benktander iterations</p>
+                        </a>
+                        <a href="chain-ladder.html" class="resource-card">
+                            <i class="fas fa-link"></i>
+                            <h3>Chain Ladder</h3>
+                            <p>Convergence target for many iterations</p>
+                        </a>
+                        <a href="cape-cod.html" class="resource-card">
+                            <i class="fas fa-water"></i>
+                            <h3>Cape Cod</h3>
+                            <p>Alternative expected loss ratio approach</p>
+                        </a>
+                        <a href="../index.html" class="resource-card">
+                            <i class="fas fa-home"></i>
+                            <h3>Home</h3>
+                            <p>Return to methodology selection</p>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Upload Wizard Modal -->
+    <div id="upload-wizard" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog wizard-dialog">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-upload"></i> Upload Data Wizard</h2>
+                <button class="modal-close" id="wizard-close-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="wizard-content">
+                <!-- Wizard content will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for CSV upload -->
+    <input type="file" id="csv-file-input" accept=".csv" style="display: none;">
+
+    <!-- Settings Modal (shared across pages) -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-modal-header">
+            <h2>
+                <i class="fas fa-cog"></i>
+                Settings
+            </h2>
+            <button class="settings-close-btn" id="settings-close-btn" aria-label="Close Settings">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="settings-modal-content">
+            <div class="settings-section">
+                <h3><i class="fas fa-palette"></i> Appearance</h3>
+                <div class="setting-item">
+                    <label for="theme-select">Theme</label>
+                    <select id="theme-select" class="setting-select">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="sepia">Sepia</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <label for="font-size">Font Size</label>
+                    <select id="font-size" class="setting-select">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Compact View</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="compact-view">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-calculator"></i> Calculation</h3>
+                <div class="setting-item">
+                    <label for="precision">Decimal Precision</label>
+                    <select id="precision" class="setting-select">
+                        <option value="0">0</option>
+                        <option value="2" selected>2</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Auto-Calculate</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="auto-calculate" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Show Intermediate Steps</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-steps">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-database"></i> Data</h3>
+                <div class="setting-item">
+                    <div class="setting-label">Auto-Save Projects</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="auto-save" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label for="export-format">Default Export Format</label>
+                    <select id="export-format" class="setting-select">
+                        <option value="csv">CSV</option>
+                        <option value="xlsx" selected>Excel (XLSX)</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                <div class="setting-item">
+                    <div class="setting-label">Show Calculation Warnings</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-warnings" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-label">Show Tips</div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="show-tips" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/upload-handler.js"></script>
+</body>
+</html>

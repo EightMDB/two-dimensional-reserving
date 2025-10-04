@@ -1,0 +1,425 @@
+================================================================================
+TWO DIMENSIONAL RESERVING - COMPLETE VISUAL SITE MAP
+================================================================================
+Created: October 1, 2025
+Status: ✅ Complete Implementation
+Total Pages: 20
+================================================================================
+
+                            INDEX.HTML (Homepage)
+                                    |
+    ┌───────────────────────────────┼───────────────────────────────┐
+    |                               |                               |
+DASHBOARD                    QUICK ACTIONS              AVAILABLE METHODOLOGIES
+4 Stat Cards              4 Action Cards                   4 Method Cards
+                                                                |
+                                                    ┌───────────┴───────────┐
+                                                    |                       |
+                                    ┌───────────────┴─────────┐    ┌────────┴────────┐
+                                    |                         |    |                 |
+                          chain-ladder.html    bornhuetter-ferguson.html  benktander.html
+                          cape-cod.html
+                                    |
+                    ┌───────────────┴────────────┬────────────────┐
+                    |                            |                |
+            DATA INPUT TAB              CONFIGURATION TAB    RESULTS TAB
+            - Upload Section            - Export Actions    - Analysis Output
+            - Required Fields           - Settings          - Charts & Tables
+            - Parameters
+
+
+================================================================================
+                        SIDEBAR NAVIGATION STRUCTURE
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│  SIDEBAR (Collapsible: 70px → 260px)                                    │
+│  ═══════════════════════════════════════════════════════════════════    │
+│                                                                          │
+│  ┌─ MAIN ────────────────────────────────────────────────────────┐     │
+│  │                                                                 │     │
+│  │  🏠 Home → index.html                                          │     │
+│  │                                                                 │     │
+│  │  📁 Projects ▼                                                 │     │
+│  │     ├─ 📋 All Projects → projects/projects.html               │     │
+│  │     ├─ ➕ New Project → [Modal]                               │     │
+│  │     └─ 🔀 Compare Projects → projects/project-comparison.html │     │
+│  │                                                                 │     │
+│  │  💾 Data Library ▼                                             │     │
+│  │     ├─ 📋 All Datasets → data/data-library.html               │     │
+│  │     ├─ 📤 Upload Dataset → [Upload Wizard]                    │     │
+│  │     └─ 📊 Data Viewer → data/data-viewer.html                 │     │
+│  │                                                                 │     │
+│  │  📈 Analysis ▼                                                 │     │
+│  │     ├─ 📊 Dashboard → analysis/analysis-dashboard.html        │     │
+│  │     ├─ 👁 Results Viewer → analysis/results-viewer.html       │     │
+│  │     └─ 📄 Report Builder → analysis/report-builder.html       │     │
+│  │                                                                 │     │
+│  └─────────────────────────────────────────────────────────────────┘     │
+│                                                                          │
+│  ┌─ METHODOLOGIES ───────────────────────────────────────────────┐     │
+│  │                                                                 │     │
+│  │  🔗 Chain Ladder → chain-ladder.html                          │     │
+│  │  ⚖️  Bornhuetter-Ferguson → bornhuetter-ferguson.html         │     │
+│  │  〰️  Benktander → benktander.html                             │     │
+│  │  🌊 Cape Cod → cape-cod.html                                  │     │
+│  │                                                                 │     │
+│  └─────────────────────────────────────────────────────────────────┘     │
+│                                                                          │
+│  ┌─ TOOLS ───────────────────────────────────────────────────────┐     │
+│  │                                                                 │     │
+│  │  🧮 Calculator → tools/calculator.html                        │     │
+│  │  🩺 Diagnostics → tools/data-diagnostics.html                 │     │
+│  │                                                                 │     │
+│  └─────────────────────────────────────────────────────────────────┘     │
+│                                                                          │
+│  ┌─ HELP ────────────────────────────────────────────────────────┐     │
+│  │                                                                 │     │
+│  │  ❓ Help Center → help/help.html                              │     │
+│  │  📖 Methodology Guide → help/methodology-guide.html           │     │
+│  │  📝 Glossary → help/glossary.html                             │     │
+│  │                                                                 │     │
+│  └─────────────────────────────────────────────────────────────────┘     │
+│                                                                          │
+│  ┌─ FOOTER ──────────────────────────────────────────────────────┐     │
+│  │                                                                 │     │
+│  │  ⚙️  Settings ▼                                                │     │
+│  │     ├─ ⚙️ Settings → settings/settings.html                   │     │
+│  │     └─ 👤 Profile → settings/profile.html                     │     │
+│  │                                                                 │     │
+│  └─────────────────────────────────────────────────────────────────┘     │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                    DETAILED PAGE HIERARCHY WITH TABS
+================================================================================
+
+📁 PROJECT MANAGEMENT
+│
+├─ 📋 projects/projects.html
+│   ├─ Sections: Search Bar, Filters, Projects Grid
+│   ├─ Actions: Create Project (Modal), Search, Filter
+│   └─ Links to:
+│       ├─ project-detail.html?id=[ID]
+│       └─ project-comparison.html
+│
+├─ 📄 projects/project-detail.html
+│   ├─ Tab 1: Overview (Project Info + Data Summary)
+│   ├─ Tab 2: Data View (Preview Table)
+│   ├─ Tab 3: Results (Analysis Results)
+│   ├─ Tab 4: History (Version Timeline)
+│   └─ Actions: Edit, Run Analysis, Export
+│
+└─ 🔀 projects/project-comparison.html
+    ├─ Sections: Project Selection (2-4 dropdowns)
+    ├─ Comparison Table (Side-by-Side Metrics)
+    ├─ Visual Charts (Comparison Graphs)
+    └─ Actions: Compare, Export
+
+
+💾 DATA MANAGEMENT
+│
+├─ 📋 data/data-library.html
+│   ├─ Stats: Total Datasets, Records, Storage, Last Upload
+│   ├─ Sections: Search Bar, Filters, Dataset Cards Grid
+│   ├─ Actions: Upload Dataset, Search, Filter
+│   └─ Links to: data-viewer.html
+│
+└─ 📊 data/data-viewer.html
+    ├─ Sections: Dataset Selector, Column Stats, Quality Checks
+    ├─ Interactive Table (Sort, Filter, Search, Pagination)
+    ├─ Actions: Edit Cells, Select Rows, Export
+    └─ Features: Search, Sort, Filter, Quality Checks
+
+
+📈 ANALYSIS & REPORTING
+│
+├─ 📊 analysis/analysis-dashboard.html
+│   ├─ Stats: Total, Completed, Running, Failed
+│   ├─ Tabs: All (12), Running (2), Completed (8), Failed (2)
+│   ├─ Analysis List (with progress bars)
+│   ├─ Recent Results (4 quick access cards)
+│   └─ Actions: New Analysis, View Results, Pause/Stop
+│
+├─ 👁 analysis/results-viewer.html
+│   ├─ Sections: Chart Area, Statistical Tables
+│   ├─ Features: Interactive Charts, Data Tables
+│   └─ Actions: Export (PDF, Excel, CSV)
+│
+└─ 📄 analysis/report-builder.html
+    ├─ Templates: Blank, Executive, Detailed, Regulatory
+    ├─ Section Builder (Drag-and-drop)
+    ├─ Preview Area
+    └─ Actions: Generate Report (PDF, Word, PowerPoint)
+
+
+🔧 TOOLS & UTILITIES
+│
+├─ 🧮 tools/calculator.html
+│   ├─ Tab 1: Loss Development (LDF Calculator)
+│   ├─ Tab 2: IBNR Estimate (Reserve Calculator)
+│   ├─ Tab 3: What-If Scenarios (Sensitivity Analysis)
+│   └─ Features: Real-time Calculations, Results Display
+│
+└─ 🩺 tools/data-diagnostics.html
+    ├─ Stats: Quality Score (95%), Issues (3), Outliers (5)
+    ├─ Sections: Issues List, Recommendations
+    ├─ Features: Quality Checks, Outlier Detection
+    └─ Actions: Run Diagnostics, View Details
+
+
+⚙️ SETTINGS & ADMINISTRATION
+│
+├─ ⚙️ settings/settings.html
+│   ├─ Tab 1: User Preferences (Theme, Defaults, Display)
+│   ├─ Tab 2: Analysis Defaults (Periods, Tail, Confidence)
+│   ├─ Tab 3: Export Settings (Format, Include Options)
+│   ├─ Tab 4: Data Storage (Usage, Clear Cache)
+│   └─ Actions: Save Settings
+│
+└─ 👤 settings/profile.html
+    ├─ Sections: User Info, Usage Stats, Recent Activity
+    ├─ Stats: Projects (24), Analyses (156), Datasets (12)
+    ├─ Timeline: Recent Activity Feed
+    └─ Actions: Edit Profile
+
+
+❓ HELP & DOCUMENTATION
+│
+├─ ❓ help/help.html
+│   ├─ Sections: Search, Getting Started, Video Tutorials
+│   ├─ FAQ Accordion (expandable questions)
+│   ├─ Contact Support (Email, Live Chat)
+│   └─ Links to: methodology-guide.html, glossary.html
+│
+├─ 📖 help/methodology-guide.html
+│   ├─ Sections: When to Use Each Method (4 cards)
+│   ├─ Comparison Matrix (Feature Table)
+│   ├─ Best Practices (4 recommendations)
+│   └─ Links to: All methodology pages
+│
+└─ 📝 help/glossary.html
+    ├─ Sections: Search, Common Terms (14 definitions)
+    ├─ Key Formulas (4 formula cards)
+    ├─ Features: Search/Filter Terms
+    └─ Formula Displays (LaTeX-style)
+
+
+🔗 METHODOLOGIES (Root Level)
+│
+├─ chain-ladder.html
+│   ├─ Dashboard Stats (4 cards)
+│   ├─ Quick Actions (4 cards)
+│   ├─ Tab 1: Data Input
+│   │   ├─ Data Upload Section
+│   │   ├─ Required Fields Section
+│   │   └─ Development Factor Config Section
+│   ├─ Tab 2: Configuration (Export Actions)
+│   └─ Upload Wizard (3-tab modal)
+│
+├─ bornhuetter-ferguson.html
+│   ├─ Dashboard Stats + Quick Actions
+│   ├─ Tab 1: Data Input (Upload, Fields, BF Parameters)
+│   ├─ Tab 2: Configuration
+│   ├─ Tab 3: Methodology Overview
+│   ├─ Tab 4: Key Concepts
+│   └─ Tab 5: Examples
+│
+├─ benktander.html
+│   ├─ Dashboard Stats + Quick Actions
+│   ├─ Tab 1: Data Input (Upload, Fields, Iterations)
+│   ├─ Tab 2: Configuration
+│   ├─ Tab 3: Methodology Overview
+│   ├─ Tab 4: Key Concepts
+│   └─ Tab 5: Examples
+│
+└─ cape-cod.html
+    ├─ Dashboard Stats + Quick Actions
+    ├─ Tab 1: Data Input (Upload, Fields, Output)
+    ├─ Tab 2: Configuration
+    ├─ Tab 3: Methodology Overview
+    ├─ Tab 4: Key Concepts
+    └─ Tab 5: Examples
+
+
+================================================================================
+                        UPLOAD WIZARD (Shared Modal)
+================================================================================
+
+                    Available on all 4 methodology pages
+
+    ┌──────────────────────────────────────────────────────┐
+    │  Upload Data Wizard                                   │
+    ├──────────────────────────────────────────────────────┤
+    │                                                        │
+    │  [Preview] [Column Mapping] [Confirm]  ← Tabs        │
+    │                                                        │
+    │  ┌─ TAB 1: PREVIEW ──────────────────────────────┐   │
+    │  │                                                 │   │
+    │  │  Dashboard Stats (4 cards):                    │   │
+    │  │  ├─ File Name                                  │   │
+    │  │  ├─ Data Rows                                  │   │
+    │  │  ├─ Columns                                    │   │
+    │  │  └─ Status                                     │   │
+    │  │                                                 │   │
+    │  │  Data Preview Table (first 10 rows)            │   │
+    │  │                                                 │   │
+    │  └─────────────────────────────────────────────────┘   │
+    │                                                        │
+    │  ┌─ TAB 2: COLUMN MAPPING ───────────────────────┐   │
+    │  │                                                 │   │
+    │  │  4 Mapping Cards:                              │   │
+    │  │  ├─ 📅 Incurred Date → [Dropdown]             │   │
+    │  │  ├─ ✅ Paid Date → [Dropdown]                 │   │
+    │  │  ├─ 💵 Paid Amount → [Dropdown]               │   │
+    │  │  └─ 🏷️  Category/LOB → [Dropdown]             │   │
+    │  │                                                 │   │
+    │  │  (Auto-suggestion based on headers)            │   │
+    │  │                                                 │   │
+    │  └─────────────────────────────────────────────────┘   │
+    │                                                        │
+    │  ┌─ TAB 3: CONFIRMATION ─────────────────────────┐   │
+    │  │                                                 │   │
+    │  │  Summary Stats (4 cards):                      │   │
+    │  │  ├─ Total Records                              │   │
+    │  │  ├─ Validation Status ✓                        │   │
+    │  │  ├─ Mapped Fields (4/4)                        │   │
+    │  │  └─ Ready to Import                            │   │
+    │  │                                                 │   │
+    │  │  Mapping Review:                               │   │
+    │  │  Incurred Date: claim_date                     │   │
+    │  │  Paid Date: payment_date                       │   │
+    │  │  Paid Amount: amount_paid                      │   │
+    │  │  Category: line_of_business                    │   │
+    │  │                                                 │   │
+    │  └─────────────────────────────────────────────────┘   │
+    │                                                        │
+    │  [Previous] [Next/Import] [Cancel]                    │
+    │                                                        │
+    └────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                        BREADCRUMB EXAMPLES
+================================================================================
+
+Homepage:
+  Home
+
+Projects Page:
+  Home → Projects
+
+Project Detail:
+  Home → Projects → Q3 2024 Chain Ladder Analysis
+
+Project Comparison:
+  Home → Projects → Compare Projects
+
+Data Library:
+  Home → Data Library
+
+Data Viewer:
+  Home → Data Library → Data Viewer
+
+Analysis Dashboard:
+  Home → Analysis Dashboard
+
+Results Viewer:
+  Home → Analysis → Results Viewer
+
+Report Builder:
+  Home → Analysis → Report Builder
+
+Calculator:
+  Home → Reserve Calculator
+
+Diagnostics:
+  Home → Data Diagnostics
+
+Settings:
+  Home → Settings
+
+Profile:
+  Home → Profile
+
+Help Center:
+  Home → Help Center
+
+Methodology Guide:
+  Home → Methodology Guide
+
+Glossary:
+  Home → Glossary
+
+Chain Ladder:
+  Home → Chain Ladder
+
+Bornhuetter-Ferguson:
+  Home → Bornhuetter-Ferguson
+
+Benktander:
+  Home → Benktander
+
+Cape Cod:
+  Home → Cape Cod
+
+
+================================================================================
+                            QUICK REFERENCE
+================================================================================
+
+TOTAL PAGES: 20
+├─ Existing: 4 (index.html + 4 methodologies)
+└─ New: 16
+
+NEW DIRECTORIES CREATED: 12
+├─ HTML: 6 (projects, data, analysis, tools, settings, help)
+└─ JavaScript: 6 (js/projects, js/data, js/analysis, js/tools, js/settings, js/help)
+
+FILES CREATED: 32
+├─ HTML Pages: 15
+├─ JavaScript Files: 15
+└─ Documentation: 2
+
+KEY FEATURES:
+✅ Consistent sidebar navigation
+✅ Breadcrumb trails
+✅ Card-based UI design
+✅ Tab interfaces
+✅ Modal dialogs
+✅ Search & filter
+✅ Interactive tables
+✅ Form validation
+✅ Real-time calculations
+✅ Export functionality
+
+SHARED COMPONENTS:
+✅ Collapsible sidebar (70px ↔ 260px)
+✅ Top bar (breadcrumbs + notifications + user menu)
+✅ Upload wizard modal (3-tab system)
+✅ Settings modal
+✅ Project modal
+
+CSS FRAMEWORK:
+✅ Custom properties (CSS variables)
+✅ Card components (stat-card, action-card, content-card)
+✅ Responsive grids
+✅ Theme support (Light, Dark, Sepia)
+
+JAVASCRIPT ARCHITECTURE:
+✅ IIFE patterns
+✅ Event-driven
+✅ LocalStorage integration
+✅ Modular structure
+✅ No dependencies (vanilla JS)
+
+================================================================================
+                            END OF VISUAL SITE MAP
+================================================================================
+
+Documentation: See docs/SITE-STRUCTURE.md for complete details
+Summary: See docs/IMPLEMENTATION-SUMMARY.md for implementation notes
+Date: October 1, 2025
+Status: ✅ COMPLETE

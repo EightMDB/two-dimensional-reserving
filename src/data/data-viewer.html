@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Viewer - Two Dimensional Reserving</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body data-theme="light">
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="sidebar-title">Reserving</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav" role="navigation">
+                <div class="nav-section">
+                    <h3 class="nav-heading">Main</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../index.html" class="nav-item">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../projects/projects.html" class="nav-item" id="projects-trigger">
+                                <i class="fas fa-folder"></i>
+                                <span>Projects</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../projects/projects.html" class="submenu-item"><i class="fas fa-list"></i> All Projects</a></li>
+                                <li><a href="#" class="submenu-item" id="new-project-link"><i class="fas fa-plus"></i> New Project</a></li>
+                                <li><a href="../projects/project-comparison.html" class="submenu-item"><i class="fas fa-code-compare"></i> Compare Projects</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="data-library.html" class="nav-item active" id="data-trigger">
+                                <i class="fas fa-database"></i>
+                                <span>Data Library</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="data-library.html" class="submenu-item"><i class="fas fa-list"></i> All Datasets</a></li>
+                                <li><a href="#" class="submenu-item" id="upload-dataset-link"><i class="fas fa-upload"></i> Upload Dataset</a></li>
+                                <li><a href="data-viewer.html" class="submenu-item"><i class="fas fa-table"></i> Data Viewer</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="../analysis/analysis-dashboard.html" class="nav-item" id="analysis-trigger">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Analysis</span>
+                                <i class="fas fa-chevron-right nav-arrow"></i>
+                            </a>
+                            <ul class="nav-submenu">
+                                <li><a href="../analysis/analysis-dashboard.html" class="submenu-item"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                                <li><a href="../analysis/results-viewer.html" class="submenu-item"><i class="fas fa-eye"></i> Results Viewer</a></li>
+                                <li><a href="../analysis/report-builder.html" class="submenu-item"><i class="fas fa-file-alt"></i> Report Builder</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Methodologies</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../methodologies/chain-ladder.html" class="nav-item">
+                                <i class="fas fa-link"></i>
+                                <span>Chain Ladder</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/bornhuetter-ferguson.html" class="nav-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <span>Bornhuetter-Ferguson</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/benktander.html" class="nav-item">
+                                <i class="fas fa-bezier-curve"></i>
+                                <span>Benktander</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../methodologies/cape-cod.html" class="nav-item">
+                                <i class="fas fa-water"></i>
+                                <span>Cape Cod</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Tools</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../tools/calculator.html" class="nav-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../tools/data-diagnostics.html" class="nav-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Diagnostics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-heading">Help</h3>
+                    <ul class="nav-list">
+                        <li>
+                            <a href="../help/help.html" class="nav-item">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/methodology-guide.html" class="nav-item">
+                                <i class="fas fa-book"></i>
+                                <span>Methodology Guide</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../help/glossary.html" class="nav-item">
+                                <i class="fas fa-list"></i>
+                                <span>Glossary</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../settings/settings.html" class="nav-item" id="settings-trigger">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right nav-arrow"></i>
+                </a>
+                <ul class="nav-submenu">
+                    <li><a href="../settings/settings.html" class="submenu-item"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="../settings/profile.html" class="submenu-item"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-actions">
+                    <button class="action-btn" id="notifications-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">0</span>
+                    </button>
+                    <button class="action-btn" id="user-menu-btn" aria-label="User Menu">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1><i class="fas fa-table"></i> Data Viewer & Editor</h1>
+                    <p class="page-description">Interactive data table with filtering and editing capabilities</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="export-data-btn">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <button class="btn btn-primary" id="save-changes-btn" disabled>
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dataset Selection & Stats -->
+            <section class="content-section">
+                <div class="content-card">
+                    <div class="dataset-selector-bar">
+                        <div class="form-group inline">
+                            <label for="dataset-select">Select Dataset:</label>
+                            <select id="dataset-select" class="form-input">
+                                <option value="">Choose a dataset...</option>
+                                <option value="sample1">Sample Claims Data 2024</option>
+                                <option value="sample2">Historical Loss Data</option>
+                            </select>
+                        </div>
+                        <div class="dataset-quick-stats">
+                            <span><i class="fas fa-table"></i> <strong id="row-count">0</strong> rows</span>
+                            <span><i class="fas fa-columns"></i> <strong id="col-count">0</strong> columns</span>
+                            <span><i class="fas fa-filter"></i> <strong id="filtered-count">0</strong> filtered</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Column Statistics -->
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-chart-pie"></i> Column Statistics</h3>
+                    <div class="stats-grid" id="column-stats">
+                        <div class="stat-item">
+                            <label>Select a column to view statistics</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Quality Checks -->
+            <section class="content-section">
+                <div class="content-card">
+                    <h3><i class="fas fa-check-circle"></i> Data Quality Checks</h3>
+                    <div class="quality-checks-grid">
+                        <div class="quality-check-item">
+                            <div class="quality-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="quality-content">
+                                <h4>No Missing Values</h4>
+                                <p>All required fields are populated</p>
+                            </div>
+                        </div>
+                        <div class="quality-check-item">
+                            <div class="quality-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="quality-content">
+                                <h4>3 Potential Outliers</h4>
+                                <p>Values exceed 3 standard deviations</p>
+                            </div>
+                        </div>
+                        <div class="quality-check-item">
+                            <div class="quality-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="quality-content">
+                                <h4>Date Format Valid</h4>
+                                <p>All dates are properly formatted</p>
+                            </div>
+                        </div>
+                        <div class="quality-check-item">
+                            <div class="quality-icon success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="quality-content">
+                                <h4>No Duplicates</h4>
+                                <p>No duplicate records found</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Data Table -->
+            <section class="content-section">
+                <div class="content-card">
+                    <div class="table-toolbar">
+                        <h3><i class="fas fa-table"></i> Data Table</h3>
+                        <div class="table-controls">
+                            <div class="search-box small">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="table-search" placeholder="Search in table...">
+                            </div>
+                            <button class="btn btn-sm btn-secondary" id="clear-filters-btn">
+                                <i class="fas fa-times"></i> Clear Filters
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table interactive" id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all">
+                                    </th>
+                                    <th>Incurred Date <i class="fas fa-sort"></i></th>
+                                    <th>Paid Date <i class="fas fa-sort"></i></th>
+                                    <th>Paid Amount <i class="fas fa-sort"></i></th>
+                                    <th>Category <i class="fas fa-sort"></i></th>
+                                    <th>Status <i class="fas fa-sort"></i></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox"></td>
+                                    <td>2024-01-15</td>
+                                    <td>2024-03-22</td>
+                                    <td>$12,500.00</td>
+                                    <td>Auto</td>
+                                    <td><span class="badge-success">Paid</span></td>
+                                    <td>
+                                        <button class="icon-btn small" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="icon-btn small" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <!-- More rows would be dynamically loaded -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-pagination">
+                        <div class="pagination-info">
+                            Showing <strong>1-50</strong> of <strong>1,250</strong> records
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="btn btn-sm btn-secondary" disabled>
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </button>
+                            <span class="pagination-pages">
+                                <button class="btn btn-sm btn-primary">1</button>
+                                <button class="btn btn-sm btn-secondary">2</button>
+                                <button class="btn btn-sm btn-secondary">3</button>
+                                <span>...</span>
+                                <button class="btn btn-sm btn-secondary">25</button>
+                            </span>
+                            <button class="btn btn-sm btn-secondary">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/data/data-viewer.js"></script>
+</body>
+</html>

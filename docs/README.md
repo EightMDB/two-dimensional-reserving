@@ -126,19 +126,59 @@ npm run pack
 ## File Structure
 
 ```
-├── index.html              # Main application interface
-├── triangle-methodology.js # Core actuarial calculations and triangle methodology
-├── functions.js            # UI functions, wizards, configuration, and utilities
-├── main.js                 # Application initialization and state management
-├── styles.css              # Professional styling and responsive design
-├── electron-main.js        # Electron main process (desktop app)
-├── package.json            # Node.js dependencies and build configuration
-├── launch-app.bat          # Windows launcher script
-├── dist/                   # Built desktop application
+two-dimensional-reserving/
+├── src/                    # Source code and assets
+│   ├── index.html         # Main application interface
+│   ├── debug.html         # Debugging utilities
+│   ├── favicon.ico        # Application icon
+│   ├── css/               # Stylesheets
+│   │   ├── main.css      # Global styles and layout
+│   │   ├── components/   # Reusable component styles
+│   │   │   ├── buttons.css
+│   │   │   ├── forms.css
+│   │   │   ├── tables.css
+│   │   │   └── tabs.css
+│   │   └── views/        # View-specific styles
+│   │       ├── data-input.css
+│   │       ├── triangle.css
+│   │       ├── analysis.css
+│   │       └── export.css
+│   └── js/                # JavaScript modules
+│       ├── main.js       # Application initialization
+│       ├── state/        # State management
+│       │   ├── AppState.js
+│       │   └── StateManager.js
+│       ├── services/     # Business logic services
+│       │   ├── FileService.js
+│       │   ├── ValidationService.js
+│       │   └── CalculationService.js
+│       ├── controllers/  # Application controllers
+│       │   ├── DataController.js
+│       │   ├── TriangleController.js
+│       │   └── ExportController.js
+│       ├── views/        # UI rendering
+│       │   ├── DataInputView.js
+│       │   ├── TriangleView.js
+│       │   ├── AnalysisView.js
+│       │   └── ExportView.js
+│       └── utils/        # Utility functions
+│           └── DOMUtils.js
+├── docs/                  # Documentation
+│   ├── README.md         # Project overview (this file)
+│   ├── ROADMAP.md        # Development roadmap
+│   ├── chain-ladder-methodology.md  # Actuarial methodology
+│   ├── html-templates.md # Component templates and examples
+│   └── project-structure.md # Project structure documentation
+├── dist/                  # Built desktop application
 │   └── Two Dimensional Reserving-win32-x64/
-│       └── Two Dimensional Reserving.exe  # Windows executable
-└── README.md              # This documentation
+│       └── Two Dimensional Reserving.exe
+├── electron-main.js       # Electron main process (desktop app)
+├── package.json           # Node.js dependencies and build configuration
+├── launch-app.bat         # Windows launcher script
+└── test-claims.csv        # Sample test data
 ```
+
+For detailed information about the project structure, see [docs/project-structure.md](docs/project-structure.md).
 
 ## System Requirements
 
@@ -173,11 +213,24 @@ npm run dist
 
 The desktop application is distributed as a portable executable requiring no installation. Simply copy the `dist/Two Dimensional Reserving-win32-x64/` folder to any Windows computer and run the executable.
 
+## 📚 Documentation
+
+This project includes comprehensive documentation:
+
+- **[README.md](README.md)** - Project overview, features, and quick start (this file)
+- **[ROADMAP.md](ROADMAP.md)** - Long-term development vision and planned features
+- **[chain-ladder-methodology.md](chain-ladder-methodology.md)** - Detailed actuarial methodology and algorithms
+- **[html-templates.md](html-templates.md)** - Templates and patterns for adding new features
+- **[project-structure.md](project-structure.md)** - Complete project structure and architecture
+
 ## 🔄 Future Development
 
 The application continues to evolve with planned enhancements for:
 - **Multi-platform support**: macOS and Linux desktop applications
-- **Advanced statistical testing**: Additional actuarial methodologies
+- **Advanced statistical testing**: Additional actuarial methodologies (Bornhuetter-Ferguson, Cape Cod)
 - **Enhanced visualization**: Interactive charts and graphs
 - **Performance optimization**: Large dataset handling improvements
 - **Cloud integration**: Optional cloud storage and collaboration features
+- **Regulatory compliance**: ASOP and NAIC requirements implementation
+
+For a detailed roadmap, see [docs/ROADMAP.md](docs/ROADMAP.md).

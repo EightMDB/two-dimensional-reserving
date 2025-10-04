@@ -16,6 +16,13 @@ This document provides comprehensive documentation of the chain-ladder method im
 8. [Detailed Step-by-Step Instructions](#detailed-step-by-step-instructions)
 9. [Technical Reference](#technical-reference)
 
+## Related Documentation
+
+- [README.md](README.md) - Project overview and quick start
+- [project-structure.md](project-structure.md) - File organization and architecture
+- [html-templates.md](html-templates.md) - Templates for extending the application
+- [ROADMAP.md](ROADMAP.md) - Future development plans
+
 ## Core Methodology
 
 The chain-ladder method operates on the fundamental assumption that claims will develop according to historical patterns. The methodology involves:
@@ -43,31 +50,46 @@ This is the standard chain-ladder development factor formula where each factor r
 
 ### Key Components
 
-1. **Data Processing Layer** (`triangle-methodology.js:118-234`)
+1. **Data Processing Layer** (`js/services/CalculationService.js`)
    - Raw claims data ingestion and validation
    - Period assignment and aggregation
    - Triangle matrix construction
 
-2. **Analysis Engine** (`triangle-methodology.js:378-596`)
+2. **Analysis Engine** (`js/services/CalculationService.js`)
    - Development factor calculations
    - Multiple calculation methodologies
    - Statistical outlier handling
 
-3. **Projection Module** (`triangle-methodology.js:598-643`)
+3. **Projection Module** (`js/services/CalculationService.js`)
    - Reserve estimates using calculated factors
    - Ultimate claim value projections
    - Period-by-period reserve breakdown
 
+4. **UI Layer** (`js/views/TriangleView.js`, `js/views/AnalysisView.js`)
+   - Triangle rendering and visualization
+   - Analysis results display
+   - Interactive configuration
+
 ### File Structure
+
+The application now uses a modular structure with separate files for different concerns:
 
 ```
 src/
-├── triangle-methodology.js  # Core actuarial calculations and triangle methodology
-├── functions.js             # UI functions, wizards, configuration, and utilities
-├── main.js                  # Application initialization and state management
 ├── index.html               # User interface
-└── styles.css               # Visual styling
+├── css/                    # Stylesheets (organized by component and view)
+└── js/                     # JavaScript modules
+    ├── main.js            # Application initialization
+    ├── services/
+    │   └── CalculationService.js  # Core actuarial calculations
+    ├── controllers/
+    │   └── TriangleController.js  # Triangle generation logic
+    └── views/
+        ├── TriangleView.js        # Triangle visualization
+        └── AnalysisView.js        # Analysis display
 ```
+
+See [project-structure.md](project-structure.md) for complete file organization.
 
 ## Data Processing Workflow
 
@@ -86,16 +108,16 @@ The application expects claims data with the following fields:
 
 ### Processing Steps
 
-1. **Data Validation** (handled by `functions.js` wizard functions)
+1. **Data Validation** (handled by `js/services/ValidationService.js`)
    - Date format validation
    - Numeric amount validation
    - Missing value detection
 
-2. **Period Assignment** (`triangle-methodology.js:6-99`)
+2. **Period Assignment** (`js/services/CalculationService.js`)
    - Incurred period calculation based on granularity
    - Development period calculation using specified method
 
-3. **Aggregation** (`triangle-methodology.js:118-234`)
+3. **Aggregation** (`js/services/CalculationService.js`)
    - Claims grouped by incurred and development periods
    - Cumulative totals calculated
 
@@ -103,7 +125,7 @@ The application expects claims data with the following fields:
 
 ### Primary Function: `buildTriangleMatrix(data)`
 
-**Location**: `triangle-methodology.js:118-234`
+**Location**: `js/services/CalculationService.js`
 
 **Purpose**: Constructs both incremental and cumulative claims development triangles from raw claims data.
 
@@ -161,7 +183,7 @@ The application expects claims data with the following fields:
 
 ### Primary Function: `calculateDevelopmentFactors(triangle)`
 
-**Location**: `triangle-methodology.js:378-596`
+**Location**: `js/services/CalculationService.js`
 
 **Purpose**: Calculates age-to-age development factors using various methodological approaches.
 
@@ -216,7 +238,7 @@ triangle.periods.forEach(period => {
 
 #### Statistical Enhancements
 
-1. **Outlier Removal** (`triangle-methodology.js:455-474`)
+1. **Outlier Removal** (`js/services/CalculationService.js`)
    ```javascript
    function removeOutliers(factors, weights) {
        const mean = factors.reduce((sum, f) => sum + f, 0) / factors.length;
@@ -248,7 +270,7 @@ triangle.periods.forEach(period => {
 
 ### Primary Function: `generateReserveProjections(triangle)`
 
-**Location**: `triangle-methodology.js:598-643`
+**Location**: `js/services/CalculationService.js`
 
 **Purpose**: Projects ultimate claim values and calculates required reserves.
 
@@ -363,8 +385,8 @@ triangle.periods.forEach(period => {
 
 1. **Execute Triangle Generation**
    ```javascript
-   // Triggered by: document.getElementById('generate-triangle').click()
-   generateClaimsTriangle();
+   // Triggered by: Generate Triangle button in UI
+   // Handled by: TriangleController.generateTriangle()
    ```
 
 2. **Triangle Construction Process**
@@ -414,12 +436,12 @@ triangle.periods.forEach(period => {
 
 | Function | Location | Purpose |
 |----------|----------|---------|
-| `generateClaimsTriangle()` | `triangle-methodology.js:104` | Main triangle generation controller |
-| `buildTriangleMatrix(data)` | `triangle-methodology.js:141` | Core triangle construction |
-| `getDevelopmentPeriod()` | `triangle-methodology.js:26` | Development period calculation |
-| `calculateDevelopmentFactors()` | `triangle-methodology.js:392` | Age-to-age factor calculation |
-| `generateReserveProjections()` | `triangle-methodology.js:598` | Ultimate value projection |
-| `displayTriangle()` | `triangle-methodology.js:234` | Triangle visualization |
+| `generateTriangle()` | `js/controllers/TriangleController.js` | Main triangle generation controller |
+| `buildTriangleMatrix(data)` | `js/services/CalculationService.js` | Core triangle construction |
+| `getDevelopmentPeriod()` | `js/services/CalculationService.js` | Development period calculation |
+| `calculateDevelopmentFactors()` | `js/services/CalculationService.js` | Age-to-age factor calculation |
+| `generateReserveProjections()` | `js/services/CalculationService.js` | Ultimate value projection |
+| `render()` | `js/views/TriangleView.js` | Triangle visualization |
 
 ### Data Structures
 
