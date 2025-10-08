@@ -340,10 +340,10 @@
      */
     function createMappingCards(headers, suggestedMapping) {
         const requiredFields = [
-            { id: 'incurredDate', label: 'Incurred Date', icon: 'calendar' },
-            { id: 'paidDate', label: 'Paid Date', icon: 'calendar-check' },
-            { id: 'paidAmount', label: 'Paid Amount', icon: 'dollar-sign' },
-            { id: 'delimiter', label: 'Category/LOB', icon: 'tag' }
+            { id: 'incurredDate', label: 'Incurred Date', icon: 'calendar', required: true },
+            { id: 'paidDate', label: 'Paid Date', icon: 'calendar-check', required: true },
+            { id: 'paidAmount', label: 'Paid Amount', icon: 'dollar-sign', required: true },
+            { id: 'delimiter', label: 'Category/LOB', icon: 'tag', required: false }
         ];
 
         return `
@@ -352,10 +352,10 @@
                     <div class="mapping-card">
                         <div class="mapping-card-header">
                             <i class="fas fa-${field.icon}"></i>
-                            <h4>${field.label}</h4>
+                            <h4>${field.label}${field.required ? '' : ' (Optional)'}</h4>
                         </div>
                         <select class="mapping-select" data-field="${field.id}">
-                            <option value="">-- Select Column --</option>
+                            <option value="">${field.required ? '-- Select Column --' : 'None'}</option>
                             ${headers.map(header => `
                                 <option value="${header}" ${suggestedMapping[field.id] === header ? 'selected' : ''}>
                                     ${header}
@@ -487,35 +487,48 @@
         const mappedFields = Object.values(mapping).filter(v => v).length;
         mappedCount.textContent = mappedFields;
 
-        // Validate
-        const isValid = mappedFields === 4;
-        if (isValid) {
+        // Validate - only check required fields (incurredDate, paidDate, paidAmount)
+        const requiredFieldsMapped = ['incurredDate', 'paidDate', 'paidAmount'].every(field => mapping[field]);
+        if (requiredFieldsMapped) {
             validationStatus.textContent = 'Valid';
-            validationStatus.parentElement.querySelector('.stat-card-icon').className = 'stat-card-icon green';
+            const iconElement = validationStatus.parentElement.parentElement.querySelector('.stat-card-icon');
+            if (iconElement) {
+                iconElement.className = 'stat-card-icon green';
+            }
         } else {
             validationStatus.textContent = 'Incomplete';
-            validationStatus.parentElement.querySelector('.stat-card-icon').className = 'stat-card-icon orange';
+            const iconElement = validationStatus.parentElement.parentElement.querySelector('.stat-card-icon');
+            if (iconElement) {
+                iconElement.className = 'stat-card-icon orange';
+            }
         }
 
         // Update summary
         const requiredFields = {
-            incurredDate: 'Incurred Date',
-            paidDate: 'Paid Date',
-            paidAmount: 'Paid Amount',
-            delimiter: 'Category/LOB'
+            incurredDate: { label: 'Incurred Date', required: true },
+            paidDate: { label: 'Paid Date', required: true },
+            paidAmount: { label: 'Paid Amount', required: true },
+            delimiter: { label: 'Category/LOB', required: false }
         };
 
-        summaryContent.innerHTML = Object.entries(requiredFields).map(([field, label]) => {
-            const mappedColumn = mapping[field] || '<span style="color: #e74c3c;">Not mapped</span>';
+        summaryContent.innerHTML = Object.entries(requiredFields).map(([field, info]) => {
+            let mappedColumn;
+            if (mapping[field]) {
+                mappedColumn = mapping[field];
+            } else if (info.required) {
+                mappedColumn = '<span style="color: #e74c3c;">Not mapped</span>';
+            } else {
+                mappedColumn = '<span style="color: #95a5a6;">None</span>';
+            }
             return `
                 <div class="mapping-summary-item">
-                    <strong>${label}:</strong> ${mappedColumn}
+                    <strong>${info.label}${info.required ? '' : ' (Optional)'}:</strong> ${mappedColumn}
                 </div>
             `;
         }).join('');
 
         // Enable/disable import button
-        document.getElementById('wizard-import').disabled = !isValid;
+        document.getElementById('wizard-import').disabled = !requiredFieldsMapped;
     }
 
     /**
@@ -571,9 +584,16 @@
         console.log('Importing data:', csvData);
         console.log('With mapping:', window.wizardData.mapping);
 
-        // Show success message
-        const message = `Successfully imported ${csvData.validRows} rows from ${fileName}`;
-        alert(message);
+        // Store imported data globally
+        window.importedData = {
+            csvData: csvData,
+            fileName: fileName,
+            mapping: window.wizardData.mapping,
+            importedAt: new Date()
+        };
+
+        // Update data preview if available
+        updateDataPreview(csvData, window.wizardData.mapping);
 
         // Close wizard
         closeWizard();
@@ -583,6 +603,61 @@
         if (fileInput) {
             fileInput.value = '';
         }
+    }
+
+    /**
+     * Update data preview section
+     * @param {Object} csvData - CSV data
+     * @param {Object} mapping - Column mapping
+     */
+    function updateDataPreview(csvData, mapping) {
+        const previewContainer = document.getElementById('data-preview-container');
+        if (!previewContainer) return;
+
+        // Get mapped columns
+        const incurredDateCol = mapping.incurredDate;
+        const paidDateCol = mapping.paidDate;
+        const paidAmountCol = mapping.paidAmount;
+        const delimiterCol = mapping.delimiter;
+
+        // Create preview table
+        const previewRows = csvData.rows.slice(0, 10);
+
+        let tableHTML = `
+            <div class="data-preview-header">
+                <div>
+                    <h3><i class="fas fa-check-circle" style="color: var(--success);"></i> Data Loaded Successfully</h3>
+                    <p>${csvData.validRows} rows imported</p>
+                </div>
+            </div>
+            <div class="preview-table-container">
+                <table class="wizard-preview-table">
+                    <thead>
+                        <tr>
+                            ${incurredDateCol ? `<th><i class="fas fa-calendar"></i> ${incurredDateCol}</th>` : ''}
+                            ${paidDateCol ? `<th><i class="fas fa-calendar-check"></i> ${paidDateCol}</th>` : ''}
+                            ${paidAmountCol ? `<th><i class="fas fa-dollar-sign"></i> ${paidAmountCol}</th>` : ''}
+                            ${delimiterCol ? `<th><i class="fas fa-tag"></i> ${delimiterCol}</th>` : ''}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${previewRows.map(row => `
+                            <tr>
+                                ${incurredDateCol ? `<td>${row[incurredDateCol] || ''}</td>` : ''}
+                                ${paidDateCol ? `<td>${row[paidDateCol] || ''}</td>` : ''}
+                                ${paidAmountCol ? `<td>${row[paidAmountCol] || ''}</td>` : ''}
+                                ${delimiterCol ? `<td>${row[delimiterCol] || ''}</td>` : ''}
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            <p class="stat-label" style="text-align: center; margin-top: 1rem;">
+                Showing first ${previewRows.length} of ${csvData.validRows} rows
+            </p>
+        `;
+
+        previewContainer.innerHTML = tableHTML;
     }
 
     /**

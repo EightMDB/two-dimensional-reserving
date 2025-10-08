@@ -318,6 +318,17 @@
                             </div>
                         </div>
                     </section>
+
+                    <section class="content-section">
+                        <h2 class="section-title"><i class="fas fa-table"></i> Data Preview</h2>
+                        <div class="content-card">
+                            <div id="data-preview-container" class="empty-state">
+                                <i class="fas fa-database"></i>
+                                <h3>No Data Loaded</h3>
+                                <p>Upload claims data to see a preview here</p>
+                            </div>
+                        </div>
+                    </section>
                 </section>
 
                 <!-- Configuration Panel -->
@@ -514,6 +525,22 @@
         </div>
     </div>
 
+    <!-- Analysis Configuration Wizard Modal -->
+    <div id="analysis-wizard" class="modal" style="display: none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog wizard-dialog">
+            <div class="modal-header">
+                <h2><i class="fas fa-sliders-h"></i> Analysis Configuration</h2>
+                <button class="modal-close" id="analysis-wizard-close-btn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="analysis-wizard-content">
+                <!-- Analysis wizard content will be dynamically populated -->
+            </div>
+        </div>
+    </div>
+
     <!-- Hidden file input for CSV upload -->
     <input type="file" id="csv-file-input" accept=".csv" style="display: none;">
 
@@ -562,5 +589,6 @@
 
     <script src="../js/sidebar.js"></script>
     <script src="../js/upload-handler.js"></script>
+    <script src="../js/methodologies/chain-ladder.js"></script>
 </body>
 </html>
